@@ -25,7 +25,6 @@ class Screen {
   }
 
   _init() {
-    populateSelect(this._doc, this._cityListId, cities, "normal");
     console.log("Screen. Getting favorites");
     populateSelect(
       this._doc,
