@@ -1,0 +1,85 @@
+$bg-color-main-body: lightgray;
+$fg-color-main-body: black;
+$bg-color-main-panel: lightgray;
+$fg-color-location: maroon;
+$fg-color-sign: gold;
+$fg-warning-color: red;
+$font-size-location: 12pt;
+$border-color: gray;
+
+@mixin flex-settings {
+
+  .main-panel {
+    padding: 20px;
+    background: $bg-color-main-panel;
+    border-radius: 10px;
+    border: 1px solid $border-color;
+    line-height: 1.5;
+  }
+
+  .header,
+  .footer {
+    padding: 20px 0 20px 0;
+    flex-direction: column;
+  }
+
+  .favorites,
+  .history {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 10px;
+
+    input[type="text"] {
+      width: 70%;
+    }
+  }
+
+  .loc-field {
+    flex-grow: 1;
+
+    input[type="text"] {
+      width: 90%;
+    }
+  }
+
+  .base-units {
+    min-width: 80px;
+    flex-grow: 0;
+  }
+
+  .left-panel,
+  .right-panel {
+    min-height: 150px;
+    flex-direction: column;
+  }
+
+  .left-panel {
+    width: 70%;
+    align-content: left;
+    align-items: left;
+    text-align: left;
+  }
+
+  .right-panel {
+    width: 30%;
+    align-content: right;
+    align-items: right;
+    text-align: right;
+  }
+
+  .right-top {
+    width: 100%;
+  }
+
+  .right-bottom {
+    width: 100%;
+    font-size: 12pt;
+    line-height: 1.1;
+  }
+
+  .title,
+  .controls {
+    width: 100%;
+    text-align: center;
+  }
+}

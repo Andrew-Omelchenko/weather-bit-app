@@ -1,0 +1,124 @@
+* {
+  font-family: "Roboto", sans-serif;
+  font-stretch: ultra-condensed;
+  box-sizing: border-box; }
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center; }
+  .flex-container.center {
+    justify-content: center;
+    align-items: center; }
+
+body {
+  background: lightgray; }
+
+@media screen and (max-width: 320px) {
+  .flex-container {
+    width: 320px; } }
+@media screen and (min-width: 321px) {
+  .flex-container {
+    width: 320px;
+    margin-left: auto;
+    margin-right: auto; } }
+.main-panel {
+  padding: 20px;
+  background: lightgray;
+  border-radius: 10px;
+  border: 1px solid gray;
+  line-height: 1.5; }
+
+.header,
+.footer {
+  padding: 20px 0 20px 0;
+  flex-direction: column; }
+
+.favorites,
+.history {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px; }
+  .favorites input[type="text"],
+  .history input[type="text"] {
+    width: 70%; }
+
+.loc-field {
+  flex-grow: 1; }
+  .loc-field input[type="text"] {
+    width: 90%; }
+
+.base-units {
+  min-width: 80px;
+  flex-grow: 0; }
+
+.left-panel,
+.right-panel {
+  min-height: 150px;
+  flex-direction: column; }
+
+.left-panel {
+  width: 70%;
+  align-content: left;
+  align-items: left;
+  text-align: left; }
+
+.right-panel {
+  width: 30%;
+  align-content: right;
+  align-items: right;
+  text-align: right; }
+
+.right-top {
+  width: 100%; }
+
+.right-bottom {
+  width: 100%;
+  font-size: 12pt;
+  line-height: 1.1; }
+
+.title,
+.controls {
+  width: 100%;
+  text-align: center; }
+
+.temperature {
+  font-size: 42pt; }
+
+.add-temp {
+  font-size: 10pt; }
+
+.temp-min {
+  color: darkblue; }
+
+.temp-max {
+  color: crimson; }
+
+.location {
+  font-size: 12pt;
+  color: maroon; }
+
+.humidity-icon {
+  width: 24px;
+  height: 24px; }
+
+.fa-star,
+.fa-history {
+  color: gold; }
+
+.fa-times-circle {
+  color: red; }
+
+.btn {
+  font-size: 12pt;
+  border-radius: 5px;
+  border: 1px solid gray;
+  color: black;
+  background: lightgray;
+  padding: 5px 8px 5px 8px; }
+  .btn:hover {
+    opacity: 0.5; }
+
+/*# sourceMappingURL=style.css.map */

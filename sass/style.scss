@@ -1,0 +1,88 @@
+@import "_base";
+
+* {
+	font-family: "Roboto", sans-serif;
+	font-stretch: ultra-condensed;
+	box-sizing: border-box;
+}
+
+.flex-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-content: center;
+	align-items: center;
+
+	&.center {
+		justify-content: center;
+		align-items: center;
+	}
+}
+
+body {
+	background: $bg-color-main-body;
+}
+
+@media screen and (max-width: 320px) {
+	.flex-container {
+		width: 320px;
+	}
+}
+
+@media screen and (min-width: 321px) {
+	.flex-container {
+		width: 320px;
+		margin-left: auto;
+		margin-right: auto;
+	}
+}
+
+@include flex-settings;
+
+.temperature {
+	font-size: 42pt;
+}
+
+.add-temp {
+	font-size: 10pt;
+}
+
+.temp-min {
+	color: darkblue;
+}
+
+.temp-max {
+	color: crimson;
+}
+
+.location {
+	font-size: $font-size-location;
+	color: $fg-color-location;
+}
+
+.humidity-icon {
+	width: 24px;
+	height: 24px;
+}
+
+.fa-star,
+.fa-history {
+	color: $fg-color-sign;
+}
+
+.fa-times-circle {
+	color: $fg-warning-color;
+}
+
+.btn {
+	font-size: 12pt;
+	border-radius: 5px;
+	border: 1px solid $border-color;
+	color: $fg-color-main-body;
+	background: $bg-color-main-body;
+	padding: 5px 8px 5px 8px;
+
+	&:hover {
+		opacity: 0.5;
+	}
+}
