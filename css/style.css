@@ -65,6 +65,9 @@ body {
   align-items: left;
   text-align: left; }
 
+.left-bottom {
+  line-height: 1.0; }
+
 .right-panel {
   width: 30%;
   align-content: right;
@@ -99,6 +102,12 @@ body {
 .location {
   font-size: 12pt;
   color: maroon; }
+
+.day {
+  font-weight: bold; }
+
+.icon {
+  width: 100%; }
 
 .humidity-icon {
   width: 24px;

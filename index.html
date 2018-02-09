@@ -37,16 +37,20 @@
     </header>
     <main>
       <section class="flex-container main-panel">
+        <div class="flex-container top-panel">
+          <span class="location">
+            <div id="location">location</div>
+          </span>
+          <span>
+            <button class="btn" id="add-favorite-btn" title="Adds city to favorites">
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
         <div class="flex-container left-panel">
           <div class="left-top">
-            <div class="location">
-              <div id="location">location</div>
-              <div>
-                <button class="btn" id="add-favorite-btn" title="Adds city to favorites">
-                  <i class="fa fa-star" aria-hidden="true"></i>
-                </button>
-              </div>
-            </div>
+            <div class="day" id="day">Fri</div>
+            <time class="date" datetime="2018-02-09">2018-02-09</time>
             <div class="add-temp temp-min">
               min: <span id="temp-min">0</span>&deg;<span id="temp-min-units">temperature-units</span>
             </div>
@@ -54,7 +58,7 @@
               max: <span id="temp-max">0</span>&deg;<span id="temp-max-units">temperature-units</span>
             </div>
           </div>
-          <div class="left-top">
+          <div class="left-bottom">
             <div class="temperature">
               <span id="temperature">0</span>&deg;<span id="temperature-units">temperature-units</span>
             </div>
@@ -62,7 +66,7 @@
         </div>
         <div class="flex-container right-panel">
           <div class="right-top">
-            <img id="icon" src="" alt="weather-state">
+            <img class="icon" id="icon" src="https://www.weatherbit.io/static/img/icons/s02d.png" alt="weather-state">
           </div>
           <div class="right-bottom">
             <div id="description">none</div>
