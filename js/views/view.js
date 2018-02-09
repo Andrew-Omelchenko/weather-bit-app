@@ -130,57 +130,75 @@ class Screen {
     `<section class="flex-container main-panel">
       <div class="flex-container top-panel">
         <span class="location">
-          <div id="location">location</div>
+          <div id="location">${weather.data.city_name},${weather.data.country_code}</div>
         </span>
       </div>
       <div class="flex-container left-panel">
         <div class="left-top">
-          <div class="day" id="day">Friday</div>
-          <time class="date" datetime="2018-02-09">2018-02-09</time>
+          <div class="day" id="day">
+            ${dayOfWeek[new Date(weather.data.data[0].datetime).getDay()]}
+          </div>
+          <time class="date" datetime="${weather.data.data[0].datetime}">
+            ${weather.data.data[0].datetime}
+          </time>
           <div class="add-temp temp-min">
-            min: <span id="temp-min">0</span>&deg;<span id="temp-min-units">temperature-units</span>
+            min: <span id="temp-min">
+              ${Math.round(weather.data.data[0].min_temp)}
+            </span>&deg;
+            <span id="temp-min-units">
+              ${weather.currentTemperatureUnits}
+            </span>
           </div>
           <div class="add-temp temp-max">
-            max: <span id="temp-max">0</span>&deg;<span id="temp-max-units">temperature-units</span>
+            max: <span id="temp-max">
+              ${Math.round(weather.data.data[0].max_temp)}
+            </span>&deg;
+            <span id="temp-max-units">
+              ${weather.currentTemperatureUnits}
+            </span>
           </div>
         </div>
         <div class="left-bottom">
           <div class="temperature">
-            <span id="temperature">0</span>&deg;<span id="temperature-units">temperature-units</span>
+            <span id="temperature">
+              ${Math.round(weather.data.data[0].temp)}
+            </span>&deg;
+            <span id="temperature-units">
+              ${weather.currentTemperatureUnits}
+            </span>
           </div>
         </div>
       </div>
       <div class="flex-container right-panel">
         <div class="right-top">
-          <img class="icon" id="icon" src="https://www.weatherbit.io/static/img/icons/s02d.png" alt="weather-state">
+          <img class="icon" id="icon" 
+            src="${iconLink}${weather.data.data[0].weather.icon}.png" 
+            alt="weather-state">
         </div>
         <div class="right-bottom">
-          <div id="description">none</div>
+          <div id="description">
+            ${weather.data.data[0].weather.description}
+          </div>
           <div class="humidity">
             <img class="humidity-icon" src="img/humidity.png" alt="humidity: ">
-            <span id="humidity">0</span>%
+            <span id="humidity">
+              ${weather.data.data[0].rh}
+            </span>%
           </div>
           <div class="wind">
-            <span id="velocity">0</span><span id="velocity-units">velocity-units</span>
-            <span id="direction">direction</span>
+            <span id="velocity">
+              ${weather.data.data[0].wind_spd}
+            </span><span id="velocity-units">
+              ${weather.currentVelocityUnits}
+            </span>
+            <span id="direction">
+              ${weather.data.data[0].wind_cdir}
+            </span>
           </div>
         </div>
       </div>
     </section>`;
     this._currentDayId.insertAdjacentHTML('beforeend', currentDayString);
-    // this._temperatureId.innerHTML = Math.round(weather.temperature);
-    // this._temperatureUnitsId.innerHTML = weather.temperatureUnits;
-    // this._tempMinId.innerHTML = Math.round(weather.tempMin);
-    // this._tempMinUnitsId.innerHTML = weather.temperatureUnits;
-    // this._tempMaxId.innerHTML = Math.round(weather.tempMax);
-    // this._tempMaxUnitsId.innerHTML = weather.temperatureUnits;
-    // this._locationId.innerHTML = `${weather.location}, ${weather.country}`;
-    // this._iconId.src = `${iconLink}${weather.weatherState}.png`;
-    // this._descriptionId.innerHTML = weather.description;
-    // this._humidityId.innerHTML = weather.humidity;
-    // this._velocityId.innerHTML = Math.round(weather.velocity);
-    // this._velocityUnitsId.innerHTML = weather.velocityUnits;
-    // this._directionId.innerHTML = weather.direction;
 
     this._anotherDaysId.innerHTML = "";
     for (let i = 1; i <= 6; i++) {
