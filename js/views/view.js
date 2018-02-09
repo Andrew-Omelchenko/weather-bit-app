@@ -141,19 +141,19 @@ class Screen {
           <time class="date" datetime="${weather.data.data[0].datetime}">
             ${weather.data.data[0].datetime}
           </time>
-          <div class="add-temp temp-min">
-            min: <span id="temp-min">
-              ${Math.round(weather.data.data[0].min_temp)}
-            </span>&deg;
-            <span id="temp-min-units">
-              ${weather.currentTemperatureUnits}
-            </span>
-          </div>
           <div class="add-temp temp-max">
             max: <span id="temp-max">
               ${Math.round(weather.data.data[0].max_temp)}
             </span>&deg;
             <span id="temp-max-units">
+              ${weather.currentTemperatureUnits}
+            </span>
+          </div>
+          <div class="add-temp temp-min">
+            min: <span id="temp-min">
+              ${Math.round(weather.data.data[0].min_temp)}
+            </span>&deg;
+            <span id="temp-min-units">
               ${weather.currentTemperatureUnits}
             </span>
           </div>
