@@ -12,6 +12,18 @@ let iconPath = `https://www.weatherbit.io/static/img/icons/${data[day].weather.i
 
 let request = `${urlBase}${key}${daysMod}${nDays}${unitsMod}${units}${locMod}${location}`;
 
+let dayString = `
+  <div class="day-${i}">
+    <div class="day"
+      ${dayOfWeek[weather.data.data[i].datetime.getDay()]}
+    </div>
+    <div>
+      <img src="${iconPath}${weather.data.data[i].weather.icon}.png">
+    </div>
+    <div class="temp">${weather.data.data[i].temp;}&deg;${weather.currentTemperatureUnits}</div>
+  </div>
+`;
+
 const response = {
   data: [
     {

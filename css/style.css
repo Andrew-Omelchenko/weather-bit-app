@@ -29,7 +29,22 @@ body {
   background: lightgray;
   border-radius: 10px;
   border: 1px solid gray;
-  line-height: 1.5; }
+  line-height: 1.5;
+  margin-bottom: 10px; }
+
+.day-panel {
+  width: 30%;
+  padding: 5px;
+  background: lightgray;
+  border-radius: 5px;
+  border: 1px solid gray;
+  line-height: 1.5;
+  font-weight: bold;
+  margin: 7px 0 7px 0; }
+
+.center {
+  width: 100%;
+  text-align: center; }
 
 .header,
 .footer {
@@ -45,14 +60,11 @@ body {
   .history input[type="text"] {
     width: 70%; }
 
-.loc-field {
-  flex-grow: 1; }
-  .loc-field input[type="text"] {
-    width: 90%; }
+.loc-field input[type="text"] {
+  width: 170px; }
 
 .base-units {
-  min-width: 80px;
-  flex-grow: 0; }
+  min-width: 60px; }
 
 .left-panel,
 .right-panel {

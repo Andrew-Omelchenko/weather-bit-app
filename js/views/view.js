@@ -3,24 +3,13 @@ class Screen {
     this._doc = doc;
     this._controller = controller;
     this._weather = weather;
-    this._temperatureId = doc.getElementById(ids.temperatureId);
-    this._temperatureUnitsId = doc.getElementById(ids.temperatureUnitsId);
-    this._tempMinId = doc.getElementById(ids.tempMinId);
-    this._tempMinUnitsId = doc.getElementById(ids.tempMinUnitsId);
-    this._tempMaxId = doc.getElementById(ids.tempMaxId);
-    this._tempMaxUnitsId = doc.getElementById(ids.tempMaxUnitsId);
-    this._locationId = doc.getElementById(ids.locationId);
-    this._iconId = doc.getElementById(ids.iconId);
-    this._descriptionId = doc.getElementById(ids.descriptionId);
-    this._humidityId = doc.getElementById(ids.humidityId);
-    this._velocityId = doc.getElementById(ids.velocityId);
-    this._velocityUnitsId = doc.getElementById(ids.velocityUnitsId);
-    this._directionId = doc.getElementById(ids.directionId);
-    this._cityListId = doc.getElementById(ids.cityListId);
-    this._favoritesFieldId = doc.getElementById(ids.favoritesFieldId);
+    // controls
     this._favoritesListId = doc.getElementById(ids.favoritesListId);
-    this._historyFieldId = doc.getElementById(ids.historyFieldId);
     this._historyListId = doc.getElementById(ids.historyListId);
+    // data
+    this._currentDayId = doc.getElementById(ids.currentDayId);
+    this._anotherDaysId = doc.getElementById(ids.anotherDaysId);
+    // init
     this._init();
   }
 
@@ -133,19 +122,81 @@ class Screen {
   }
 
   update(weather) {
+    // update reference to current Weather object
     this._weather = weather;
-    this._temperatureId.innerHTML = Math.round(weather.temperature);
-    this._temperatureUnitsId.innerHTML = weather.temperatureUnits;
-    this._tempMinId.innerHTML = Math.round(weather.tempMin);
-    this._tempMinUnitsId.innerHTML = weather.temperatureUnits;
-    this._tempMaxId.innerHTML = Math.round(weather.tempMax);
-    this._tempMaxUnitsId.innerHTML = weather.temperatureUnits;
-    this._locationId.innerHTML = `${weather.location}, ${weather.country}`;
-    this._iconId.src = `${iconLink}${weather.weatherState}.png`;
-    this._descriptionId.innerHTML = weather.description;
-    this._humidityId.innerHTML = weather.humidity;
-    this._velocityId.innerHTML = Math.round(weather.velocity);
-    this._velocityUnitsId.innerHTML = weather.velocityUnits;
-    this._directionId.innerHTML = weather.direction;
+
+    this._currentDayId.innerHTML = "";
+    let currentDayString =
+    `<section class="flex-container main-panel">
+      <div class="flex-container top-panel">
+        <span class="location">
+          <div id="location">location</div>
+        </span>
+      </div>
+      <div class="flex-container left-panel">
+        <div class="left-top">
+          <div class="day" id="day">Friday</div>
+          <time class="date" datetime="2018-02-09">2018-02-09</time>
+          <div class="add-temp temp-min">
+            min: <span id="temp-min">0</span>&deg;<span id="temp-min-units">temperature-units</span>
+          </div>
+          <div class="add-temp temp-max">
+            max: <span id="temp-max">0</span>&deg;<span id="temp-max-units">temperature-units</span>
+          </div>
+        </div>
+        <div class="left-bottom">
+          <div class="temperature">
+            <span id="temperature">0</span>&deg;<span id="temperature-units">temperature-units</span>
+          </div>
+        </div>
+      </div>
+      <div class="flex-container right-panel">
+        <div class="right-top">
+          <img class="icon" id="icon" src="https://www.weatherbit.io/static/img/icons/s02d.png" alt="weather-state">
+        </div>
+        <div class="right-bottom">
+          <div id="description">none</div>
+          <div class="humidity">
+            <img class="humidity-icon" src="img/humidity.png" alt="humidity: ">
+            <span id="humidity">0</span>%
+          </div>
+          <div class="wind">
+            <span id="velocity">0</span><span id="velocity-units">velocity-units</span>
+            <span id="direction">direction</span>
+          </div>
+        </div>
+      </div>
+    </section>`;
+    this._currentDayId.insertAdjacentHTML('beforeend', currentDayString);
+    // this._temperatureId.innerHTML = Math.round(weather.temperature);
+    // this._temperatureUnitsId.innerHTML = weather.temperatureUnits;
+    // this._tempMinId.innerHTML = Math.round(weather.tempMin);
+    // this._tempMinUnitsId.innerHTML = weather.temperatureUnits;
+    // this._tempMaxId.innerHTML = Math.round(weather.tempMax);
+    // this._tempMaxUnitsId.innerHTML = weather.temperatureUnits;
+    // this._locationId.innerHTML = `${weather.location}, ${weather.country}`;
+    // this._iconId.src = `${iconLink}${weather.weatherState}.png`;
+    // this._descriptionId.innerHTML = weather.description;
+    // this._humidityId.innerHTML = weather.humidity;
+    // this._velocityId.innerHTML = Math.round(weather.velocity);
+    // this._velocityUnitsId.innerHTML = weather.velocityUnits;
+    // this._directionId.innerHTML = weather.direction;
+
+    this._anotherDaysId.innerHTML = "";
+    for (let i = 1; i <= 6; i++) {
+      let yetAnotherDaysString =
+        `<div class="flex-container day-panel">
+          <div class="date center">
+            ${dayOfWeek[new Date(weather.data.data[i].datetime).getDay()]}
+          </div>
+          <div>
+            <img class="icon" src="${iconLink}${weather.data.data[i].weather.icon}.png">
+          </div>
+          <div class="temp center">
+            ${weather.data.data[i].temp.toString()}&deg;${weather.currentTemperatureUnits}
+          </div>
+        </div>`;
+      this._anotherDaysId.insertAdjacentHTML('beforeend', yetAnotherDaysString);
+    }
   }
 }

@@ -5,6 +5,7 @@ const locMod = "&city=";
 const unitsMod = "&units=";
 const iconLink = "https://www.weatherbit.io/static/img/icons/";
 
+const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const limit = 30;
 
 // Unit systems
@@ -49,7 +50,9 @@ const ids = {
   historyFieldId: "history-field",
   historyListId: "history-lst",
   historyGoBtnId:"history-go-btn",
-  clearHistoryBtnId: "clear-history-btn"
+  clearHistoryBtnId: "clear-history-btn",
+  currentDayId: "current-day",
+  anotherDaysId: "another-days"
 };
 
 // Mock weather data

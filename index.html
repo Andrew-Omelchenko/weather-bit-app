@@ -24,62 +24,28 @@
   <body>
     <header class="header">
       <div class="flex-container">
-        <div class="loc-field">
-          <input class="btn wide" id="loc-field" type="text" placeholder="Enter location..." title="Enter location here">
-        </div>
-        <div class="base-units">
-          <select class="btn" id="base-units" title="Selects metric or imperial units">
-            <option value="metric">&deg;C, m/s</option>
-            <option value="imperial">&deg;F, mph</option>
-          </select>
-        </div>
-      </div>
-    </header>
-    <main>
-      <section class="flex-container main-panel">
-        <div class="flex-container top-panel">
-          <span class="location">
-            <div id="location">location</div>
-          </span>
           <span>
             <button class="btn" id="add-favorite-btn" title="Adds city to favorites">
               <i class="fa fa-star" aria-hidden="true"></i>
             </button>
           </span>
-        </div>
-        <div class="flex-container left-panel">
-          <div class="left-top">
-            <div class="day" id="day">Fri</div>
-            <time class="date" datetime="2018-02-09">2018-02-09</time>
-            <div class="add-temp temp-min">
-              min: <span id="temp-min">0</span>&deg;<span id="temp-min-units">temperature-units</span>
-            </div>
-            <div class="add-temp temp-max">
-              max: <span id="temp-max">0</span>&deg;<span id="temp-max-units">temperature-units</span>
-            </div>
-          </div>
-          <div class="left-bottom">
-            <div class="temperature">
-              <span id="temperature">0</span>&deg;<span id="temperature-units">temperature-units</span>
-            </div>
-          </div>
-        </div>
-        <div class="flex-container right-panel">
-          <div class="right-top">
-            <img class="icon" id="icon" src="https://www.weatherbit.io/static/img/icons/s02d.png" alt="weather-state">
-          </div>
-          <div class="right-bottom">
-            <div id="description">none</div>
-            <div class="humidity">
-              <img class="humidity-icon" src="img/humidity.png" alt="humidity: ">
-              <span id="humidity">0</span>%
-            </div>
-            <div class="wind">
-              <span id="velocity">0</span><span id="velocity-units">velocity-units</span>
-              <span id="direction">direction</span>
-            </div>
-          </div>
-        </div>
+          <span class="loc-field">
+            <input class="btn wide" id="loc-field" type="text" placeholder="Enter location..." title="Enter location here">
+          </span>
+          <span class="base-units">
+            <select class="btn" id="base-units" title="Selects metric or imperial units">
+              <option value="metric">&deg;C, m/s</option>
+              <option value="imperial">&deg;F, mph</option>
+            </select>
+          </span>
+      </div>
+    </header>
+    <main>
+      <section>
+        <div class="flex-container current-day" id="current-day"></div>
+      </section>
+      <section>
+        <div class="flex-container another-days" id="another-days"></div>
       </section>
     </main>
     <footer class="flex-container footer">

@@ -1,5 +1,6 @@
 class Weather {
   constructor(data, units) {
+    this._data = data;
     this._currentUnits = units;
     if (units == "metric") {
       this.__currentUnitsCode = unitSystems.metric.code;
@@ -22,8 +23,17 @@ class Weather {
     this._direction = data.data[0].wind_cdir;
   }
 
+  get data() {
+    return this._data;
+  }
   get currentUnits() {
     return this._currentUnits;
+  }
+  get currentTemperatureUnits() {
+    return this._currentTemperatureUnits;
+  }
+  get currentVelocityUnits() {
+    return this._currentVelocityUnits;
   }
   get weatherState() {
     return this._weatherState;
