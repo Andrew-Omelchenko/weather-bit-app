@@ -7,6 +7,7 @@ const iconLink = "https://www.weatherbit.io/static/img/icons/";
 
 const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 const limit = 30;
+const numOfDays = 7;
 
 // Unit systems
 const unitSystems = {

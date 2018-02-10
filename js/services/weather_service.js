@@ -2,7 +2,7 @@ class WeatherService {
   constructor() {}
 
   getWeather(city, unitsCode) {
-    let url = `${apiLink}${key}${daysMod}7${unitsMod}${unitsCode}${locMod}${city}`;
+    let url = `${apiLink}${key}${daysMod}${numOfDays}${unitsMod}${unitsCode}${locMod}${city}`;
     let init = {
       method: "GET",
       headers: new Headers(),

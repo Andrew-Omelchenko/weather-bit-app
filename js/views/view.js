@@ -201,7 +201,7 @@ class Screen {
     this._currentDayId.insertAdjacentHTML('beforeend', currentDayString);
 
     this._anotherDaysId.innerHTML = "";
-    for (let i = 1; i <= 6; i++) {
+    for (let i = 1; i < numOfDays; i++) {
       let yetAnotherDaysString =
         `<div class="flex-container day-panel">
           <div class="date center">
