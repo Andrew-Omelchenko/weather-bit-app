@@ -20,9 +20,17 @@ class WeatherService {
       })
       .then(data => {
         return data;
-      })
-      .catch(error => {
-        console.log(error);
+      }).catch(error => {
+        console.log(error.message);
+        // Treat network errors without responses as 500s.
+        const status = error.response ? error.response.status : 500
+        if (status === 404) {
+          // Not found handler.
+          alert("Requested location was not found. Try another one.");
+        } else {
+          // Other errors.
+          alert("Error occured. Please try later.");
+        }
       });
   }
 }

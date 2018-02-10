@@ -24,6 +24,9 @@ class WeatherController {
     this._weatherService
       .getWeather(loc, this._weather.currentUnitsCode)
       .then(data => {
+        if (!data) {
+          return;
+        }
         this._weather = new Weather(data, this._weather.currentUnits);
         this._screen.update(this._weather);
         this._wnd.history.pushState(
