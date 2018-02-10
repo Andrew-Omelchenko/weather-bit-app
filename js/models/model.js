@@ -3,11 +3,11 @@ class Weather {
     this._data = data;
     this._currentUnits = units;
     if (units == "metric") {
-      this.__currentUnitsCode = unitSystems.metric.code;
+      this._currentUnitsCode = unitSystems.metric.code;
       this._currentTemperatureUnits = unitSystems.metric.temperatureUnit;
       this._currentVelocityUnits = unitSystems.metric.velocityUnit;
     } else {
-      this.__currentUnitsCode = unitSystems.imperial.code;
+      this._currentUnitsCode = unitSystems.imperial.code;
       this._currentTemperatureUnits = unitSystems.imperial.temperatureUnit;
       this._currentVelocityUnits = unitSystems.imperial.velocityUnit;
     }
@@ -16,9 +16,15 @@ class Weather {
   get data() {
     return this._data;
   }
+
   get currentUnits() {
     return this._currentUnits;
   }
+
+  get currentUnitsCode() {
+    return this._currentUnitsCode;
+  }
+
   get currentTemperatureUnits() {
     return this._currentTemperatureUnits;
   }
@@ -31,6 +37,7 @@ class Weather {
     if (this._currentUnits == units) return;
     if (units == "metric") {
       this._currentUnits = "metric";
+      this._currentUnitsCode = unitSystems.metric.code;
       this._currentTemperatureUnits = unitSystems.metric.temperatureUnit;
       this._currentVelocityUnits = unitSystems.metric.velocityUnit;
       for (let i = 0; i < numOfDays; i++) {
@@ -41,6 +48,7 @@ class Weather {
       }
     } else if (units == "imperial") {
       this._currentUnits = "imperial";
+      this._currentUnitsCode = unitSystems.imperial.code;
       this._currentTemperatureUnits = unitSystems.imperial.temperatureUnit;
       this._currentVelocityUnits = unitSystems.imperial.velocityUnit;
       for (let i = 0; i < numOfDays; i++) {
