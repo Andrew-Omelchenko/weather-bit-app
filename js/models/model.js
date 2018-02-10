@@ -11,8 +11,6 @@ class Weather {
       this._currentTemperatureUnits = unitSystems.imperial.temperatureUnit;
       this._currentVelocityUnits = unitSystems.imperial.velocityUnit;
     }
-    this._location = data.city_name;
-    this._country = data.country_code;
   }
 
   get data() {
@@ -27,14 +25,6 @@ class Weather {
 
   get currentVelocityUnits() {
     return this._currentVelocityUnits;
-  }
-
-  get location() {
-    return this._location;
-  }
-
-  get country() {
-    return this._country;
   }
 
   switchUnits(units) {

@@ -12,7 +12,7 @@ class WeatherController {
     this._weatherService = new WeatherService();
     this._weather = new Weather(mockData, "metric");
     this._screen = new Screen(doc, this._weather, this);
-    this._screen.update(this._weather);
+    // this._screen.update(this._weather);
   }
 
   switchUnits(units) {
@@ -29,16 +29,14 @@ class WeatherController {
         this._wnd.history.pushState(
           {},
           this._doc.title,
-          `${this._base}?city=${this._weather.location},${
-            this._weather.country
-          }`
+          `${this._base}?city=${this._weather.data.city_name},${this._weather.data.country_code}`
         );
         console.log("Inside changeLocation:");
         console.log(
-          `Add to history: ${this._weather.location},${this._weather.country}`
+          `Add to history: ${this._weather.data.city_name},${this._weather.data.country_code}`
         );
         let result = this.addHistoryItem(
-          `${this._weather.location},${this._weather.country}`
+          `${this._weather.data.city_name},${this._weather.data.country_code}`
         );
         if (result) {
           let listId = this._doc.getElementById(ids.historyListId);
@@ -62,7 +60,7 @@ class WeatherController {
 
   addFavorite() {
     return this._favoritesService.add(
-      `${this._weather.location},${this._weather.country}`
+      `${this._weather.data.city_name},${this._weather.data.country_code}`
     );
   }
 
