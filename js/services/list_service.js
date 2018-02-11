@@ -1,4 +1,4 @@
-class ListService {
+export class ListService {
   constructor(storageSvc, name) {
     this._storageService = storageSvc;
     this._name = name;

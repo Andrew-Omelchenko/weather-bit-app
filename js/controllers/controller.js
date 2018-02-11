@@ -1,4 +1,13 @@
-class WeatherController {
+import * as config from "../config.js";
+import * as helper from "../helper.js";
+import { StorageService } from "./../services/storage_service.js";
+import { FavoritesService } from "./../services/favorites_service.js";
+import { HistoryService } from "./../services/history_service.js";
+import { WeatherService } from "./../services/weather_service.js";
+import { Weather } from "./../models/model.js";
+import { Screen } from "./../views/view.js";
+
+export class WeatherController {
   constructor(doc, wnd) {
     this._doc = doc;
     this._wnd = wnd;

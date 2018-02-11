@@ -1,4 +1,4 @@
-class WeatherService {
+export class WeatherService {
   constructor() {}
 
   getWeather(city, unitsCode) {

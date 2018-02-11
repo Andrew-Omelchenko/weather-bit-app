@@ -1,4 +1,4 @@
-class StorageService {
+export class StorageService {
   constructor(wnd) {
     this._wnd = wnd;
   }

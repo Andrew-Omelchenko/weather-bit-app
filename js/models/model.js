@@ -1,4 +1,4 @@
-class Weather {
+export class Weather {
   constructor(data, units) {
     this._data = data;
     this._currentUnits = units;

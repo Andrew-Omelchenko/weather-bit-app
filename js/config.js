@@ -1,12 +1,12 @@
-const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
-const keyMod = "?key=";
-const key = "91e53c3974b54ac9871fe08adfd31dd9";
-const daysMod = "&days=";
-const locMod = "&city=";
-const unitsMod = "&units=";
-const iconLink = "https://www.weatherbit.io/static/img/icons/";
+export const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
+export const keyMod = "?key=";
+export const key = "91e53c3974b54ac9871fe08adfd31dd9";
+export const daysMod = "&days=";
+export const locMod = "&city=";
+export const unitsMod = "&units=";
+export const iconLink = "https://www.weatherbit.io/static/img/icons/";
 
-const dayOfWeek = [
+export const dayOfWeek = [
   "Sunday",
   "Monday",
   "Tuesday",
@@ -15,11 +15,12 @@ const dayOfWeek = [
   "Friday",
   "Saturday"
 ];
-const limit = 30;
-const numOfDays = 7;
+
+export const limit = 30;
+export const numOfDays = 7;
 
 // Unit systems
-const unitSystems = {
+export const unitSystems = {
   metric: {
     name: "metric",
     code: "M",
@@ -35,7 +36,7 @@ const unitSystems = {
 };
 
 // ids of elements
-const ids = {
+export const ids = {
   locFieldId: "loc-field",
   baseUnitsId: "base-units",
   temperatureId: "temperature",
@@ -66,7 +67,7 @@ const ids = {
 };
 
 // Mock weather data
-const mockData = {
+export const mockData = {
   data: [
     {
       wind_cdir: "NE",

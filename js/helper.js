@@ -1,35 +1,35 @@
-function extractBase(urlString) {
+export function extractBase(urlString) {
   return urlString.split("?").slice(0, -1);
 }
 
-function parseLocation(urlString) {
+export function parseLocation(urlString) {
   let parsed = new URL(urlString);
   return parsed.searchParams.get("city");
 }
 
-function toFahrenheit(value) {
+export function toFahrenheit(value) {
   return Math.round(value * 1.8 + 32);
 }
 
-function toCelsius(value) {
+export function toCelsius(value) {
   return Math.round((value - 32) / 1.8);
 }
 
-function toMph(value) {
+export function toMph(value) {
   return Math.round(value * 2.25);
 }
 
-function toMs(value) {
+export function toMs(value) {
   return Math.round(value / 2.25);
 }
 
-function clearSelect(selectId) {
+export function clearSelect(selectId) {
   while (selectId.firstChild) {
     selectId.removeChild(selectId.firstChild);
   }
 }
 
-function populateSelect(doc, selectId, data, direction) {
+export function populateSelect(doc, selectId, data, direction) {
   let opt = null;
   if (direction == "normal") {
     for (let elem of data) {

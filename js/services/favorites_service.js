@@ -1,4 +1,4 @@
-class FavoritesService extends ListService {
+export class FavoritesService extends ListService {
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }

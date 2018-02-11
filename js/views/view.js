@@ -1,4 +1,4 @@
-class Screen {
+export class Screen {
   constructor(doc, weather, controller) {
     this._doc = doc;
     this._controller = controller;

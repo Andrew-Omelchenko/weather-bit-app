@@ -1,4 +1,4 @@
-class HistoryService extends ListService {
+export class HistoryService extends ListService {
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
