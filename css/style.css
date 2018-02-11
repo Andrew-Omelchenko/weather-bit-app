@@ -26,7 +26,7 @@ body {
     margin-right: auto; } }
 .main-panel {
   padding: 20px;
-  background: lightgray;
+  background: skyblue;
   border-radius: 10px;
   border: 1px solid gray;
   line-height: 1.5;
@@ -35,7 +35,7 @@ body {
 .day-panel {
   width: 30%;
   padding: 5px;
-  background: lightgray;
+  background: skyblue;
   border-radius: 5px;
   border: 1px solid gray;
   line-height: 1.5;
