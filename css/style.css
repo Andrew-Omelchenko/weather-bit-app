@@ -60,6 +60,9 @@ body {
   .history input[type="text"] {
     width: 70%; }
 
+.favorites {
+  margin-top: 10px; }
+
 .loc-field input[type="text"] {
   width: 170px; }
 

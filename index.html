@@ -41,52 +41,45 @@
       </div>
     </header>
     <main>
-      <section>
-        <div class="flex-container current-day" id="current-day"></div>
-      </section>
-      <section>
-        <div class="flex-container another-days" id="another-days"></div>
+      <section class="flex-container current-day" id="current-day"></section>
+      <section class="flex-container another-days" id="another-days"></section>
+      <section class="flex-container">
+        <div class="favorites">
+          <i class="fa fa-star" aria-hidden="true"></i>
+          <span>
+            <input class="btn" id="favorites-field" type="text" list="favorites-lst" placeholder="Favorites..." title="List of favorites">
+            <datalist id="favorites-lst"></datalist>
+          </span>
+          <span>
+            <button class="btn" id="favorites-go-btn" title="Loads selected city data">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+          <span>
+            <button class="btn" id="clear-favorites-btn" title="Clears list of favorites">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+        <div class="history">
+          <i class="fa fa-history" aria-hidden="true"></i>
+          <span>
+            <input class="btn" id="history-field" type="text" list="history-lst" placeholder="History..." title="History list">
+            <datalist id="history-lst"></datalist>
+          </span>
+          <span>
+            <button class="btn" id="history-go-btn" title="Loads selected city data">
+              <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+          <span>
+            <button class="btn" id="clear-history-btn" title="Clears history list">
+              <i class="fa fa-times-circle" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
       </section>
     </main>
-    <footer class="flex-container footer">
-      <div class="favorites">
-        <span>
-          <i class="fa fa-star" aria-hidden="true"></i>
-        </span>
-        <span>
-          <input class="btn" id="favorites-field" type="text" list="favorites-lst" placeholder="Favorites..." title="List of favorites">
-          <datalist id="favorites-lst"></datalist>
-        </span>
-        <span>
-          <button class="btn" id="favorites-go-btn" title="Loads selected city data">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </span>
-        <span>
-          <button class="btn" id="clear-favorites-btn" title="Clears list of favorites">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </button>
-        </span>
-      </div>
-      <div class="history">
-        <span>
-          <i class="fa fa-history" aria-hidden="true"></i>
-        </span>
-        <span>
-          <input class="btn" id="history-field" type="text" list="history-lst" placeholder="History..." title="History list">
-          <datalist id="history-lst"></datalist>
-        </span>
-        <span>
-          <button class="btn" id="history-go-btn" title="Loads selected city data">
-            <i class="fa fa-search" aria-hidden="true"></i>
-          </button>
-        </span>
-        <span>
-          <button class="btn" id="clear-history-btn" title="Clears history list">
-            <i class="fa fa-times-circle" aria-hidden="true"></i>
-          </button>
-        </span>
-      </div>
-    </footer>
+    <footer class="flex-container footer"></footer>
   </body>
 </html>
