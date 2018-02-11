@@ -1,8 +1,10 @@
+import * as config from "../config.js";
+
 export class WeatherService {
   constructor() {}
 
   getWeather(city, unitsCode) {
-    let url = `${apiLink}${keyMod}${key}${daysMod}${numOfDays}${unitsMod}${unitsCode}${locMod}${city}`;
+    let url = `${config.apiLink}${config.keyMod}${config.key}${config.daysMod}${config.numOfDays}${config.unitsMod}${unitsCode}${config.locMod}${city}`;
     let init = {
       method: "GET",
       headers: new Headers(),

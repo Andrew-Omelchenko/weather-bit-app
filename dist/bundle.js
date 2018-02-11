@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -68,154 +68,26 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_controller__ = __webpack_require__(1);
-
-
-window.onload = function() {
-  let weatherController = new __WEBPACK_IMPORTED_MODULE_0__controllers_controller__["a" /* WeatherController */](document, window);
-  weatherController.start(window.location.href);
-};
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_js__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_list_service_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_favorites_service_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_history_service_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_weather_service_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_model_js__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_view_js__ = __webpack_require__(10);
-
-
-
-
-
-
-
-
-
-
-class WeatherController {
-  constructor(doc, wnd) {
-    this._doc = doc;
-    this._wnd = wnd;
-    this._base = extractBase(this._wnd.location.href);
-    this._storageService = new __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__["a" /* StorageService */](this._wnd);
-    this._favoritesService = new __WEBPACK_IMPORTED_MODULE_4__services_favorites_service_js__["a" /* FavoritesService */](
-      this._storageService,
-      "favorites"
-    );
-    this._historyService = new __WEBPACK_IMPORTED_MODULE_5__services_history_service_js__["a" /* HistoryService */](this._storageService, "history");
-    this._weatherService = new __WEBPACK_IMPORTED_MODULE_6__services_weather_service_js__["a" /* WeatherService */]();
-    this._weather = new __WEBPACK_IMPORTED_MODULE_7__models_model_js__["a" /* Weather */](mockData, "metric");
-    this._screen = new __WEBPACK_IMPORTED_MODULE_8__views_view_js__["a" /* Screen */](doc, this._weather, this);
-    // this._screen.update(this._weather);
-  }
-
-  switchUnits(units) {
-    this._weather.switchUnits(units, this._screen);
-    this._screen.update(this._weather);
-  }
-
-  changeLocation(loc) {
-    this._weatherService
-      .getWeather(loc, this._weather.currentUnitsCode)
-      .then(data => {
-        if (!data) {
-          return;
-        }
-        this._weather = new __WEBPACK_IMPORTED_MODULE_7__models_model_js__["a" /* Weather */](data, this._weather.currentUnits);
-        this._screen.update(this._weather);
-        this._wnd.history.pushState(
-          {},
-          this._doc.title,
-          `${this._base}?city=${this._weather.data.city_name},${this._weather.data.country_code}`
-        );
-        console.log("Inside changeLocation:");
-        console.log(
-          `Add to history: ${this._weather.data.city_name},${this._weather.data.country_code}`
-        );
-        let result = this.addHistoryItem(
-          `${this._weather.data.city_name},${this._weather.data.country_code}`
-        );
-        if (result) {
-          let listId = this._doc.getElementById(ids.historyListId);
-          clearSelect(listId);
-          populateSelect(this._doc, listId, this.getHistory(), "reverse");
-        }
-      });
-  }
-
-  start(startUrl) {
-    let loc = parseLocation(startUrl);
-    if (!loc) {
-      loc = "Kyiv,UA";
-    }
-    this.changeLocation(loc);
-  }
-
-  getFavorites() {
-    return this._favoritesService.data;
-  }
-
-  addFavorite() {
-    return this._favoritesService.add(
-      `${this._weather.data.city_name},${this._weather.data.country_code}`
-    );
-  }
-
-  clearFavorites() {
-    this._favoritesService.clear();
-  }
-
-  getHistory() {
-    return this._historyService.data;
-  }
-
-  addHistoryItem(item) {
-    return this._historyService.add(item);
-  }
-
-  clearHistory() {
-    this._historyService.clear();
-  }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = WeatherController;
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
 const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
-/* unused harmony export apiLink */
+/* harmony export (immutable) */ __webpack_exports__["a"] = apiLink;
 
 const keyMod = "?key=";
-/* unused harmony export keyMod */
+/* harmony export (immutable) */ __webpack_exports__["g"] = keyMod;
 
 const key = "91e53c3974b54ac9871fe08adfd31dd9";
-/* unused harmony export key */
+/* harmony export (immutable) */ __webpack_exports__["f"] = key;
 
 const daysMod = "&days=";
-/* unused harmony export daysMod */
+/* harmony export (immutable) */ __webpack_exports__["c"] = daysMod;
 
 const locMod = "&city=";
-/* unused harmony export locMod */
+/* harmony export (immutable) */ __webpack_exports__["i"] = locMod;
 
 const unitsMod = "&units=";
-/* unused harmony export unitsMod */
+/* harmony export (immutable) */ __webpack_exports__["m"] = unitsMod;
 
 const iconLink = "https://www.weatherbit.io/static/img/icons/";
-/* unused harmony export iconLink */
+/* harmony export (immutable) */ __webpack_exports__["d"] = iconLink;
 
 
 const dayOfWeek = [
@@ -227,14 +99,14 @@ const dayOfWeek = [
   "Friday",
   "Saturday"
 ];
-/* unused harmony export dayOfWeek */
+/* harmony export (immutable) */ __webpack_exports__["b"] = dayOfWeek;
 
 
 const limit = 30;
-/* unused harmony export limit */
+/* harmony export (immutable) */ __webpack_exports__["h"] = limit;
 
 const numOfDays = 7;
-/* unused harmony export numOfDays */
+/* harmony export (immutable) */ __webpack_exports__["k"] = numOfDays;
 
 
 // Unit systems
@@ -252,7 +124,7 @@ const unitSystems = {
     velocityUnit: "mph"
   }
 };
-/* unused harmony export unitSystems */
+/* harmony export (immutable) */ __webpack_exports__["l"] = unitSystems;
 
 
 // ids of elements
@@ -285,7 +157,7 @@ const ids = {
   currentDayId: "current-day",
   anotherDaysId: "another-days"
 };
-/* unused harmony export ids */
+/* harmony export (immutable) */ __webpack_exports__["e"] = ids;
 
 
 // Mock weather data
@@ -481,23 +353,23 @@ const mockData = {
   country_code: "UA",
   state_code: "12"
 };
-/* unused harmony export mockData */
+/* harmony export (immutable) */ __webpack_exports__["j"] = mockData;
 
 
 
 /***/ }),
-/* 3 */
+/* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* unused harmony export extractBase */
-/* unused harmony export parseLocation */
-/* unused harmony export toFahrenheit */
-/* unused harmony export toCelsius */
-/* unused harmony export toMph */
-/* unused harmony export toMs */
-/* unused harmony export clearSelect */
-/* unused harmony export populateSelect */
+/* harmony export (immutable) */ __webpack_exports__["b"] = extractBase;
+/* harmony export (immutable) */ __webpack_exports__["c"] = parseLocation;
+/* harmony export (immutable) */ __webpack_exports__["f"] = toFahrenheit;
+/* harmony export (immutable) */ __webpack_exports__["e"] = toCelsius;
+/* harmony export (immutable) */ __webpack_exports__["g"] = toMph;
+/* harmony export (immutable) */ __webpack_exports__["h"] = toMs;
+/* harmony export (immutable) */ __webpack_exports__["a"] = clearSelect;
+/* harmony export (immutable) */ __webpack_exports__["d"] = populateSelect;
 function extractBase(urlString) {
   return urlString.split("?").slice(0, -1);
 }
@@ -548,7 +420,165 @@ function populateSelect(doc, selectId, data, direction) {
 
 
 /***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+class ListService {
+  constructor(storageSvc, name) {
+    this._storageService = storageSvc;
+    this._name = name;
+    this._data = this._storageService.read(this._name);
+    if (this._data == null) {
+      this._data = [];
+    }
+  }
+
+  get data() {
+    console.log(`ListService. Getting ${this._name} data.`);
+    console.log(this._data);
+    return this._data;
+  }
+
+  clear() {
+    this._storageService.remove(this._name);
+    this._data = [];
+    console.log(`ListService. Clearing ${this._name} data.`);
+    console.log(this._data);
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = ListService;
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__controllers_controller__ = __webpack_require__(4);
+
+
+window.onload = function() {
+  let weatherController = new __WEBPACK_IMPORTED_MODULE_0__controllers_controller__["a" /* WeatherController */](document, window);
+  weatherController.start(window.location.href);
+};
+
+
+/***/ }),
 /* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_js__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_favorites_service_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_history_service_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_weather_service_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_view_js__ = __webpack_require__(10);
+
+
+
+
+
+
+
+
+
+class WeatherController {
+  constructor(doc, wnd) {
+    this._doc = doc;
+    this._wnd = wnd;
+    this._base = __WEBPACK_IMPORTED_MODULE_1__helper_js__["b" /* extractBase */](this._wnd.location.href);
+    this._storageService = new __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__["a" /* StorageService */](this._wnd);
+    this._favoritesService = new __WEBPACK_IMPORTED_MODULE_3__services_favorites_service_js__["a" /* FavoritesService */](
+      this._storageService,
+      "favorites"
+    );
+    this._historyService = new __WEBPACK_IMPORTED_MODULE_4__services_history_service_js__["a" /* HistoryService */](this._storageService, "history");
+    this._weatherService = new __WEBPACK_IMPORTED_MODULE_5__services_weather_service_js__["a" /* WeatherService */]();
+    this._weather = new __WEBPACK_IMPORTED_MODULE_6__models_model_js__["a" /* Weather */](__WEBPACK_IMPORTED_MODULE_0__config_js__["j" /* mockData */], "metric");
+    this._screen = new __WEBPACK_IMPORTED_MODULE_7__views_view_js__["a" /* Screen */](doc, this._weather, this);
+    // this._screen.update(this._weather);
+  }
+
+  switchUnits(units) {
+    this._weather.switchUnits(units, this._screen);
+    this._screen.update(this._weather);
+  }
+
+  changeLocation(loc) {
+    this._weatherService
+      .getWeather(loc, this._weather.currentUnitsCode)
+      .then(data => {
+        if (!data) {
+          return;
+        }
+        this._weather = new __WEBPACK_IMPORTED_MODULE_6__models_model_js__["a" /* Weather */](data, this._weather.currentUnits);
+        this._screen.update(this._weather);
+        this._wnd.history.pushState(
+          {},
+          this._doc.title,
+          `${this._base}?city=${this._weather.data.city_name},${this._weather.data.country_code}`
+        );
+        console.log("Inside changeLocation:");
+        console.log(
+          `Add to history: ${this._weather.data.city_name},${this._weather.data.country_code}`
+        );
+        let result = this.addHistoryItem(
+          `${this._weather.data.city_name},${this._weather.data.country_code}`
+        );
+        if (result) {
+          let listId = this._doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyListId);
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](listId);
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](this._doc, listId, this.getHistory(), "reverse");
+        }
+      });
+  }
+
+  start(startUrl) {
+    let loc = __WEBPACK_IMPORTED_MODULE_1__helper_js__["c" /* parseLocation */](startUrl);
+    if (!loc) {
+      loc = "Kyiv,UA";
+    }
+    this.changeLocation(loc);
+  }
+
+  getFavorites() {
+    return this._favoritesService.data;
+  }
+
+  addFavorite() {
+    return this._favoritesService.add(
+      `${this._weather.data.city_name},${this._weather.data.country_code}`
+    );
+  }
+
+  clearFavorites() {
+    this._favoritesService.clear();
+  }
+
+  getHistory() {
+    return this._historyService.data;
+  }
+
+  addHistoryItem(item) {
+    return this._historyService.add(item);
+  }
+
+  clearHistory() {
+    this._historyService.clear();
+  }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = WeatherController;
+
+
+
+/***/ }),
+/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -579,43 +609,16 @@ class StorageService {
 
 
 /***/ }),
-/* 5 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-class ListService {
-  constructor(storageSvc, name) {
-    this._storageService = storageSvc;
-    this._name = name;
-    this._data = this._storageService.read(this._name);
-    if (this._data == null) {
-      this._data = [];
-    }
-  }
-
-  get data() {
-    console.log(`ListService. Getting ${this._name} data.`);
-    console.log(this._data);
-    return this._data;
-  }
-
-  clear() {
-    this._storageService.remove(this._name);
-    this._data = [];
-    console.log(`ListService. Clearing ${this._name} data.`);
-    console.log(this._data);
-  }
-}
-/* unused harmony export ListService */
-
-
-
-/***/ }),
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class FavoritesService extends ListService {
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__ = __webpack_require__(2);
+
+
+
+class FavoritesService extends __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__["a" /* ListService */] {
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
@@ -629,7 +632,7 @@ class FavoritesService extends ListService {
       }
     }
     // check length limit
-    if (this._data.length == limit) {
+    if (this._data.length == __WEBPACK_IMPORTED_MODULE_0__config_js__["h" /* limit */]) {
       this._data.pop();
     }
     // add item
@@ -650,7 +653,12 @@ class FavoritesService extends ListService {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-class HistoryService extends ListService {
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__ = __webpack_require__(2);
+
+
+
+class HistoryService extends __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__["a" /* ListService */] {
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
@@ -672,7 +680,7 @@ class HistoryService extends ListService {
       this._data = tmp;
     }
     // check length limit
-    if (this._data.length == limit) {
+    if (this._data.length == __WEBPACK_IMPORTED_MODULE_0__config_js__["h" /* limit */]) {
       this._data.shift();
     }
     // add item
@@ -692,11 +700,14 @@ class HistoryService extends ListService {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+
+
 class WeatherService {
   constructor() {}
 
   getWeather(city, unitsCode) {
-    let url = `${apiLink}${keyMod}${key}${daysMod}${numOfDays}${unitsMod}${unitsCode}${locMod}${city}`;
+    let url = `${__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* apiLink */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["g" /* keyMod */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["f" /* key */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["c" /* daysMod */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["m" /* unitsMod */]}${unitsCode}${__WEBPACK_IMPORTED_MODULE_0__config_js__["i" /* locMod */]}${city}`;
     let init = {
       method: "GET",
       headers: new Headers(),
@@ -733,18 +744,23 @@ class WeatherService {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_js__ = __webpack_require__(1);
+
+
+
 class Weather {
   constructor(data, units) {
     this._data = data;
     this._currentUnits = units;
     if (units == "metric") {
-      this._currentUnitsCode = unitSystems.metric.code;
-      this._currentTemperatureUnits = unitSystems.metric.temperatureUnit;
-      this._currentVelocityUnits = unitSystems.metric.velocityUnit;
+      this._currentUnitsCode = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.code;
+      this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.temperatureUnit;
+      this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.velocityUnit;
     } else {
-      this._currentUnitsCode = unitSystems.imperial.code;
-      this._currentTemperatureUnits = unitSystems.imperial.temperatureUnit;
-      this._currentVelocityUnits = unitSystems.imperial.velocityUnit;
+      this._currentUnitsCode = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.code;
+      this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.temperatureUnit;
+      this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.velocityUnit;
     }
   }
 
@@ -772,25 +788,25 @@ class Weather {
     if (this._currentUnits == units) return;
     if (units == "metric") {
       this._currentUnits = "metric";
-      this._currentUnitsCode = unitSystems.metric.code;
-      this._currentTemperatureUnits = unitSystems.metric.temperatureUnit;
-      this._currentVelocityUnits = unitSystems.metric.velocityUnit;
-      for (let i = 0; i < numOfDays; i++) {
-        this._data.data[i].temp = toCelsius(this._data.data[i].temp);
-        this._data.data[i].min_temp = toCelsius(this._data.data[i].min_temp);
-        this._data.data[i].max_temp = toCelsius(this._data.data[i].max_temp);
-        this._data.data[i].wind_spd = toMs(this._data.data[i].wind_spd);
+      this._currentUnitsCode = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.code;
+      this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.temperatureUnit;
+      this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.velocityUnit;
+      for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {
+        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].temp);
+        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].min_temp);
+        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].max_temp);
+        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["h" /* toMs */](this._data.data[i].wind_spd);
       }
     } else if (units == "imperial") {
       this._currentUnits = "imperial";
-      this._currentUnitsCode = unitSystems.imperial.code;
-      this._currentTemperatureUnits = unitSystems.imperial.temperatureUnit;
-      this._currentVelocityUnits = unitSystems.imperial.velocityUnit;
-      for (let i = 0; i < numOfDays; i++) {
-        this._data.data[i].temp = toFahrenheit(this._data.data[i].temp);
-        this._data.data[i].min_temp = toFahrenheit(this._data.data[i].min_temp);
-        this._data.data[i].max_temp = toFahrenheit(this._data.data[i].max_temp);
-        this._data.data[i].wind_spd = toMph(this._data.data[i].wind_spd);
+      this._currentUnitsCode = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.code;
+      this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.temperatureUnit;
+      this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.velocityUnit;
+      for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {
+        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].temp);
+        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].min_temp);
+        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].max_temp);
+        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["g" /* toMph */](this._data.data[i].wind_spd);
       }
     }
   }
@@ -804,30 +820,35 @@ class Weather {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_js__ = __webpack_require__(1);
+
+
+
 class Screen {
   constructor(doc, weather, controller) {
     this._doc = doc;
     this._controller = controller;
     this._weather = weather;
     // controls
-    this._favoritesListId = doc.getElementById(ids.favoritesListId);
-    this._historyListId = doc.getElementById(ids.historyListId);
+    this._favoritesListId = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].favoritesListId);
+    this._historyListId = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyListId);
     // data
-    this._currentDayId = doc.getElementById(ids.currentDayId);
-    this._anotherDaysId = doc.getElementById(ids.anotherDaysId);
+    this._currentDayId = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].currentDayId);
+    this._anotherDaysId = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].anotherDaysId);
     // init
     this._init();
   }
 
   _init() {
     console.log("Screen. Getting favorites");
-    populateSelect(
+    __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
       this._doc,
       this._favoritesListId,
       this._controller.getFavorites(),
       "normal"
     );
-    populateSelect(
+    __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
       this._doc,
       this._historyListId,
       this._controller.getHistory(),
@@ -840,9 +861,9 @@ class Screen {
   _addListeners(view, doc, controller) {
     // add event listener to Clear button
     doc
-      .getElementById(ids.locFieldId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].locFieldId)
       .addEventListener("change", function(event) {
-        let fld = doc.getElementById(ids.locFieldId);
+        let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].locFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -851,19 +872,19 @@ class Screen {
 
     // add event listener to select element
     doc
-      .getElementById(ids.baseUnitsId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].baseUnitsId)
       .addEventListener("change", function(event) {
         controller.switchUnits(event.target.value);
       });
 
     // add event listener to add favorite button
     doc
-      .getElementById(ids.addFavoriteBtnId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].addFavoriteBtnId)
       .addEventListener("click", function(event) {
         let result = controller.addFavorite();
         if (result) {
-          clearSelect(view._favoritesListId);
-          populateSelect(
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._favoritesListId);
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
             view._doc,
             view._favoritesListId,
             controller.getFavorites(),
@@ -874,9 +895,9 @@ class Screen {
 
     // add event listener to go to favorite button
     doc
-      .getElementById(ids.favoritesGoBtnId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].favoritesGoBtnId)
       .addEventListener("click", function(event) {
-        let fld = doc.getElementById(ids.favoritesFieldId);
+        let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].favoritesFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -885,25 +906,25 @@ class Screen {
 
     // add event listener to clear favorites button
     doc
-      .getElementById(ids.clearFavoritesBtnId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].clearFavoritesBtnId)
       .addEventListener("click", function(event) {
         controller.clearFavorites();
-        clearSelect(view._favoritesListId);
-        populateSelect(
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._favoritesListId);
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
           view._doc,
           view._favoritesListId,
           controller.getFavorites(),
           "normal"
         );
-        let fld = doc.getElementById(ids.favoritesFieldId);
+        let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].favoritesFieldId);
         fld.value = "";
       });
 
     // add event listener to go to history item button
     doc
-      .getElementById(ids.historyGoBtnId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyGoBtnId)
       .addEventListener("click", function(event) {
-        let fld = doc.getElementById(ids.historyFieldId);
+        let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -912,17 +933,17 @@ class Screen {
 
     // add event listener to clear history button
     doc
-      .getElementById(ids.clearHistoryBtnId)
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].clearHistoryBtnId)
       .addEventListener("click", function(event) {
         controller.clearHistory();
-        clearSelect(view._historyListId);
-        populateSelect(
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._historyListId);
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
           view._doc,
           view._historyListId,
           controller.getHistory(),
           "reverse"
         );
-        let fld = doc.getElementById(ids.historyFieldId);
+        let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyFieldId);
         fld.value = "";
       });
   }
@@ -943,7 +964,7 @@ class Screen {
       <div class="flex-container left-panel">
         <div class="left-top">
           <div class="day" id="day">
-            ${dayOfWeek[new Date(weather.data.data[0].datetime).getDay()]}
+            ${__WEBPACK_IMPORTED_MODULE_0__config_js__["b" /* dayOfWeek */][new Date(weather.data.data[0].datetime).getDay()]}
           </div>
           <time class="date" datetime="${weather.data.data[0].datetime}">
             ${weather.data.data[0].datetime}
@@ -978,7 +999,7 @@ class Screen {
       <div class="flex-container right-panel">
         <div class="right-top">
           <img class="icon" id="icon" 
-            src="${iconLink}${weather.data.data[0].weather.icon}.png" 
+            src="${__WEBPACK_IMPORTED_MODULE_0__config_js__["d" /* iconLink */]}${weather.data.data[0].weather.icon}.png" 
             alt="weather-state">
         </div>
         <div class="right-bottom">
@@ -1007,13 +1028,13 @@ class Screen {
     this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
 
     this._anotherDaysId.innerHTML = "";
-    for (let i = 1; i < numOfDays; i++) {
+    for (let i = 1; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {
       let yetAnotherDaysString = `<div class="flex-container day-panel">
           <div class="date center">
-            ${dayOfWeek[new Date(weather.data.data[i].datetime).getDay()]}
+            ${__WEBPACK_IMPORTED_MODULE_0__config_js__["b" /* dayOfWeek */][new Date(weather.data.data[i].datetime).getDay()]}
           </div>
           <div>
-            <img class="icon" src="${iconLink}${
+            <img class="icon" src="${__WEBPACK_IMPORTED_MODULE_0__config_js__["d" /* iconLink */]}${
         weather.data.data[i].weather.icon
       }.png">
           </div>

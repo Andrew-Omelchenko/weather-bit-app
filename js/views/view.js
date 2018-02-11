@@ -1,27 +1,30 @@
+import * as config from "../config.js";
+import * as helper from "../helper.js";
+
 export class Screen {
   constructor(doc, weather, controller) {
     this._doc = doc;
     this._controller = controller;
     this._weather = weather;
     // controls
-    this._favoritesListId = doc.getElementById(ids.favoritesListId);
-    this._historyListId = doc.getElementById(ids.historyListId);
+    this._favoritesListId = doc.getElementById(config.ids.favoritesListId);
+    this._historyListId = doc.getElementById(config.ids.historyListId);
     // data
-    this._currentDayId = doc.getElementById(ids.currentDayId);
-    this._anotherDaysId = doc.getElementById(ids.anotherDaysId);
+    this._currentDayId = doc.getElementById(config.ids.currentDayId);
+    this._anotherDaysId = doc.getElementById(config.ids.anotherDaysId);
     // init
     this._init();
   }
 
   _init() {
     console.log("Screen. Getting favorites");
-    populateSelect(
+    helper.populateSelect(
       this._doc,
       this._favoritesListId,
       this._controller.getFavorites(),
       "normal"
     );
-    populateSelect(
+    helper.populateSelect(
       this._doc,
       this._historyListId,
       this._controller.getHistory(),
@@ -34,9 +37,9 @@ export class Screen {
   _addListeners(view, doc, controller) {
     // add event listener to Clear button
     doc
-      .getElementById(ids.locFieldId)
+      .getElementById(config.ids.locFieldId)
       .addEventListener("change", function(event) {
-        let fld = doc.getElementById(ids.locFieldId);
+        let fld = doc.getElementById(config.ids.locFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -45,19 +48,19 @@ export class Screen {
 
     // add event listener to select element
     doc
-      .getElementById(ids.baseUnitsId)
+      .getElementById(config.ids.baseUnitsId)
       .addEventListener("change", function(event) {
         controller.switchUnits(event.target.value);
       });
 
     // add event listener to add favorite button
     doc
-      .getElementById(ids.addFavoriteBtnId)
+      .getElementById(config.ids.addFavoriteBtnId)
       .addEventListener("click", function(event) {
         let result = controller.addFavorite();
         if (result) {
-          clearSelect(view._favoritesListId);
-          populateSelect(
+          helper.clearSelect(view._favoritesListId);
+          helper.populateSelect(
             view._doc,
             view._favoritesListId,
             controller.getFavorites(),
@@ -68,9 +71,9 @@ export class Screen {
 
     // add event listener to go to favorite button
     doc
-      .getElementById(ids.favoritesGoBtnId)
+      .getElementById(config.ids.favoritesGoBtnId)
       .addEventListener("click", function(event) {
-        let fld = doc.getElementById(ids.favoritesFieldId);
+        let fld = doc.getElementById(config.ids.favoritesFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -79,25 +82,25 @@ export class Screen {
 
     // add event listener to clear favorites button
     doc
-      .getElementById(ids.clearFavoritesBtnId)
+      .getElementById(config.ids.clearFavoritesBtnId)
       .addEventListener("click", function(event) {
         controller.clearFavorites();
-        clearSelect(view._favoritesListId);
-        populateSelect(
+        helper.clearSelect(view._favoritesListId);
+        helper.populateSelect(
           view._doc,
           view._favoritesListId,
           controller.getFavorites(),
           "normal"
         );
-        let fld = doc.getElementById(ids.favoritesFieldId);
+        let fld = doc.getElementById(config.ids.favoritesFieldId);
         fld.value = "";
       });
 
     // add event listener to go to history item button
     doc
-      .getElementById(ids.historyGoBtnId)
+      .getElementById(config.ids.historyGoBtnId)
       .addEventListener("click", function(event) {
-        let fld = doc.getElementById(ids.historyFieldId);
+        let fld = doc.getElementById(config.ids.historyFieldId);
         let loc = fld.value;
         if (loc == "") return;
         controller.changeLocation(loc);
@@ -106,17 +109,17 @@ export class Screen {
 
     // add event listener to clear history button
     doc
-      .getElementById(ids.clearHistoryBtnId)
+      .getElementById(config.ids.clearHistoryBtnId)
       .addEventListener("click", function(event) {
         controller.clearHistory();
-        clearSelect(view._historyListId);
-        populateSelect(
+        helper.clearSelect(view._historyListId);
+        helper.populateSelect(
           view._doc,
           view._historyListId,
           controller.getHistory(),
           "reverse"
         );
-        let fld = doc.getElementById(ids.historyFieldId);
+        let fld = doc.getElementById(config.ids.historyFieldId);
         fld.value = "";
       });
   }
@@ -137,7 +140,7 @@ export class Screen {
       <div class="flex-container left-panel">
         <div class="left-top">
           <div class="day" id="day">
-            ${dayOfWeek[new Date(weather.data.data[0].datetime).getDay()]}
+            ${config.dayOfWeek[new Date(weather.data.data[0].datetime).getDay()]}
           </div>
           <time class="date" datetime="${weather.data.data[0].datetime}">
             ${weather.data.data[0].datetime}
@@ -172,7 +175,7 @@ export class Screen {
       <div class="flex-container right-panel">
         <div class="right-top">
           <img class="icon" id="icon" 
-            src="${iconLink}${weather.data.data[0].weather.icon}.png" 
+            src="${config.iconLink}${weather.data.data[0].weather.icon}.png" 
             alt="weather-state">
         </div>
         <div class="right-bottom">
@@ -201,13 +204,13 @@ export class Screen {
     this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
 
     this._anotherDaysId.innerHTML = "";
-    for (let i = 1; i < numOfDays; i++) {
+    for (let i = 1; i < config.numOfDays; i++) {
       let yetAnotherDaysString = `<div class="flex-container day-panel">
           <div class="date center">
-            ${dayOfWeek[new Date(weather.data.data[i].datetime).getDay()]}
+            ${config.dayOfWeek[new Date(weather.data.data[i].datetime).getDay()]}
           </div>
           <div>
-            <img class="icon" src="${iconLink}${
+            <img class="icon" src="${config.iconLink}${
         weather.data.data[i].weather.icon
       }.png">
           </div>

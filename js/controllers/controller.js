@@ -1,7 +1,6 @@
 import * as config from "../config.js";
 import * as helper from "../helper.js";
 import { StorageService } from "./../services/storage_service.js";
-import { ListService } from "./../services/list_service.js";
 import { FavoritesService } from "./../services/favorites_service.js";
 import { HistoryService } from "./../services/history_service.js";
 import { WeatherService } from "./../services/weather_service.js";
@@ -12,7 +11,7 @@ export class WeatherController {
   constructor(doc, wnd) {
     this._doc = doc;
     this._wnd = wnd;
-    this._base = extractBase(this._wnd.location.href);
+    this._base = helper.extractBase(this._wnd.location.href);
     this._storageService = new StorageService(this._wnd);
     this._favoritesService = new FavoritesService(
       this._storageService,
@@ -20,7 +19,7 @@ export class WeatherController {
     );
     this._historyService = new HistoryService(this._storageService, "history");
     this._weatherService = new WeatherService();
-    this._weather = new Weather(mockData, "metric");
+    this._weather = new Weather(config.mockData, "metric");
     this._screen = new Screen(doc, this._weather, this);
     // this._screen.update(this._weather);
   }
@@ -52,15 +51,15 @@ export class WeatherController {
           `${this._weather.data.city_name},${this._weather.data.country_code}`
         );
         if (result) {
-          let listId = this._doc.getElementById(ids.historyListId);
-          clearSelect(listId);
-          populateSelect(this._doc, listId, this.getHistory(), "reverse");
+          let listId = this._doc.getElementById(config.ids.historyListId);
+          helper.clearSelect(listId);
+          helper.populateSelect(this._doc, listId, this.getHistory(), "reverse");
         }
       });
   }
 
   start(startUrl) {
-    let loc = parseLocation(startUrl);
+    let loc = helper.parseLocation(startUrl);
     if (!loc) {
       loc = "Kyiv,UA";
     }

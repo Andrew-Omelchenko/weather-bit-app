@@ -1,3 +1,6 @@
+import * as config from "../config.js";
+import { ListService } from "./../services/list_service.js";
+
 export class HistoryService extends ListService {
   constructor(storageSvc, name) {
     super(storageSvc, name);
@@ -20,7 +23,7 @@ export class HistoryService extends ListService {
       this._data = tmp;
     }
     // check length limit
-    if (this._data.length == limit) {
+    if (this._data.length == config.limit) {
       this._data.shift();
     }
     // add item
