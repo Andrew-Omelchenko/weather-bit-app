@@ -126,11 +126,12 @@ class Screen {
     this._weather = weather;
 
     this._currentDayId.innerHTML = "";
-    let currentDayString =
-    `<section class="flex-container main-panel">
+    let currentDayString = `<section class="flex-container main-panel">
       <div class="flex-container top-panel">
         <span class="location">
-          <div id="location">${weather.data.city_name},${weather.data.country_code}</div>
+          <div id="location">${weather.data.city_name},${
+      weather.data.country_code
+    }</div>
         </span>
       </div>
       <div class="flex-container left-panel">
@@ -160,12 +161,11 @@ class Screen {
         </div>
         <div class="left-bottom">
           <div class="temperature">
-            <span id="temperature">
-              ${Math.round(weather.data.data[0].temp)}
-            </span>&deg;
-            <span id="temperature-units">
-              ${weather.currentTemperatureUnits}
-            </span>
+            <span id="temperature">${Math.round(
+              weather.data.data[0].temp
+            )}</span>&deg;<span id="temperature-units">${
+      weather.currentTemperatureUnits
+    }</span>
           </div>
         </div>
       </div>
@@ -198,23 +198,26 @@ class Screen {
         </div>
       </div>
     </section>`;
-    this._currentDayId.insertAdjacentHTML('beforeend', currentDayString);
+    this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
 
     this._anotherDaysId.innerHTML = "";
     for (let i = 1; i < numOfDays; i++) {
-      let yetAnotherDaysString =
-        `<div class="flex-container day-panel">
+      let yetAnotherDaysString = `<div class="flex-container day-panel">
           <div class="date center">
             ${dayOfWeek[new Date(weather.data.data[i].datetime).getDay()]}
           </div>
           <div>
-            <img class="icon" src="${iconLink}${weather.data.data[i].weather.icon}.png">
+            <img class="icon" src="${iconLink}${
+        weather.data.data[i].weather.icon
+      }.png">
           </div>
           <div class="temp center">
-            ${weather.data.data[i].temp.toString()}&deg;${weather.currentTemperatureUnits}
+            ${weather.data.data[i].temp.toString()}&deg;${
+        weather.currentTemperatureUnits
+      }
           </div>
         </div>`;
-      this._anotherDaysId.insertAdjacentHTML('beforeend', yetAnotherDaysString);
+      this._anotherDaysId.insertAdjacentHTML("beforeend", yetAnotherDaysString);
     }
   }
 }
