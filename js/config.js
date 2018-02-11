@@ -1,12 +1,20 @@
 const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
-const keyMod = "?key="
+const keyMod = "?key=";
 const key = "91e53c3974b54ac9871fe08adfd31dd9";
 const daysMod = "&days=";
 const locMod = "&city=";
 const unitsMod = "&units=";
 const iconLink = "https://www.weatherbit.io/static/img/icons/";
 
-const dayOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const dayOfWeek = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday"
+];
 const limit = 30;
 const numOfDays = 7;
 
@@ -47,11 +55,11 @@ const ids = {
   cityListId: "list-of-cities",
   favoritesFieldId: "favorites-field",
   favoritesListId: "favorites-lst",
-  favoritesGoBtnId:"favorites-go-btn",
+  favoritesGoBtnId: "favorites-go-btn",
   clearFavoritesBtnId: "clear-favorites-btn",
   historyFieldId: "history-field",
   historyListId: "history-lst",
-  historyGoBtnId:"history-go-btn",
+  historyGoBtnId: "history-go-btn",
   clearHistoryBtnId: "clear-history-btn",
   currentDayId: "current-day",
   anotherDaysId: "another-days"
