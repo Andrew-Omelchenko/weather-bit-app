@@ -86,11 +86,13 @@ window.onload = function() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__helper_js__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_favorites_service_js__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_history_service_js__ = __webpack_require__(6);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_weather_service_js__ = __webpack_require__(7);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__models_model_js__ = __webpack_require__(8);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__views_view_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__services_list_service_js__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__services_favorites_service_js__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__services_history_service_js__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__services_weather_service_js__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__models_model_js__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__views_view_js__ = __webpack_require__(10);
+
 
 
 
@@ -106,14 +108,14 @@ class WeatherController {
     this._wnd = wnd;
     this._base = extractBase(this._wnd.location.href);
     this._storageService = new __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__["a" /* StorageService */](this._wnd);
-    this._favoritesService = new __WEBPACK_IMPORTED_MODULE_3__services_favorites_service_js__["a" /* FavoritesService */](
+    this._favoritesService = new __WEBPACK_IMPORTED_MODULE_4__services_favorites_service_js__["a" /* FavoritesService */](
       this._storageService,
       "favorites"
     );
-    this._historyService = new __WEBPACK_IMPORTED_MODULE_4__services_history_service_js__["a" /* HistoryService */](this._storageService, "history");
-    this._weatherService = new __WEBPACK_IMPORTED_MODULE_5__services_weather_service_js__["a" /* WeatherService */]();
-    this._weather = new __WEBPACK_IMPORTED_MODULE_6__models_model_js__["a" /* Weather */](mockData, "metric");
-    this._screen = new __WEBPACK_IMPORTED_MODULE_7__views_view_js__["a" /* Screen */](doc, this._weather, this);
+    this._historyService = new __WEBPACK_IMPORTED_MODULE_5__services_history_service_js__["a" /* HistoryService */](this._storageService, "history");
+    this._weatherService = new __WEBPACK_IMPORTED_MODULE_6__services_weather_service_js__["a" /* WeatherService */]();
+    this._weather = new __WEBPACK_IMPORTED_MODULE_7__models_model_js__["a" /* Weather */](mockData, "metric");
+    this._screen = new __WEBPACK_IMPORTED_MODULE_8__views_view_js__["a" /* Screen */](doc, this._weather, this);
     // this._screen.update(this._weather);
   }
 
@@ -129,7 +131,7 @@ class WeatherController {
         if (!data) {
           return;
         }
-        this._weather = new __WEBPACK_IMPORTED_MODULE_6__models_model_js__["a" /* Weather */](data, this._weather.currentUnits);
+        this._weather = new __WEBPACK_IMPORTED_MODULE_7__models_model_js__["a" /* Weather */](data, this._weather.currentUnits);
         this._screen.update(this._weather);
         this._wnd.history.pushState(
           {},
@@ -581,6 +583,38 @@ class StorageService {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+class ListService {
+  constructor(storageSvc, name) {
+    this._storageService = storageSvc;
+    this._name = name;
+    this._data = this._storageService.read(this._name);
+    if (this._data == null) {
+      this._data = [];
+    }
+  }
+
+  get data() {
+    console.log(`ListService. Getting ${this._name} data.`);
+    console.log(this._data);
+    return this._data;
+  }
+
+  clear() {
+    this._storageService.remove(this._name);
+    this._data = [];
+    console.log(`ListService. Clearing ${this._name} data.`);
+    console.log(this._data);
+  }
+}
+/* unused harmony export ListService */
+
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 class FavoritesService extends ListService {
   constructor(storageSvc, name) {
     super(storageSvc, name);
@@ -612,7 +646,7 @@ class FavoritesService extends ListService {
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -654,7 +688,7 @@ class HistoryService extends ListService {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -695,7 +729,7 @@ class WeatherService {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -766,7 +800,7 @@ class Weather {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

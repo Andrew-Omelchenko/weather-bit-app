@@ -1,6 +1,7 @@
 import * as config from "../config.js";
 import * as helper from "../helper.js";
 import { StorageService } from "./../services/storage_service.js";
+import { ListService } from "./../services/list_service.js";
 import { FavoritesService } from "./../services/favorites_service.js";
 import { HistoryService } from "./../services/history_service.js";
 import { WeatherService } from "./../services/weather_service.js";
