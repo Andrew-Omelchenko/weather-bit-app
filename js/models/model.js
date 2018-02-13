@@ -1,7 +1,14 @@
 import * as config from "../config.js";
 import * as helper from "../helper.js";
 
+/** Class representing a model. */
 export class Weather {
+  /**
+   * Creates model.
+   * @constructor
+   * @param {Object} data - weather data
+   * @param {string} units - name of the system of measurement units
+   */
   constructor(data, units) {
     this._data = data;
     this._currentUnits = units;
@@ -15,6 +22,8 @@ export class Weather {
       this._currentVelocityUnits = config.unitSystems.imperial.velocityUnit;
     }
   }
+
+  /** Getters section. */
 
   get data() {
     return this._data;
@@ -36,6 +45,12 @@ export class Weather {
     return this._currentVelocityUnits;
   }
 
+  /** Methods section. */
+
+  /**
+   * Switches current system of measurement units.
+   * @param {string} units - name of the system of measurement units
+   */
   switchUnits(units) {
     if (this._currentUnits == units) return;
     if (units == "metric") {

@@ -1,7 +1,15 @@
 import * as config from "../config.js";
 import * as helper from "../helper.js";
 
+/** Class representing a view. */
 export class Screen {
+  /**
+   * Creates view.
+   * @constructor
+   * @param {Document} doc - current Document object
+   * @param {Weather} weather - current Weather object
+   * @param {WeatherController} controller - current WeatherController object
+   */
   constructor(doc, weather, controller) {
     this._doc = doc;
     this._controller = controller;
@@ -16,6 +24,9 @@ export class Screen {
     this._init();
   }
 
+  /**
+   * Initializes current view elements.
+   */
   _init() {
     console.log("Screen. Getting favorites");
     helper.populateSelect(
@@ -34,6 +45,12 @@ export class Screen {
     this._addListeners(this, this._doc, this._controller);
   }
 
+  /**
+   * Adds listeners to the current view elements.
+   * @param {Screen} view - current Screen object
+   * @param {Document} doc - current Document object
+   * @param {WeatherController} controller - current WeatherController object
+   */
   _addListeners(view, doc, controller) {
     // add event listener to Clear button
     doc
@@ -46,7 +63,7 @@ export class Screen {
         fld.value = "";
       });
 
-    // add event listener to select element
+    // add event listener to select units element
     doc
       .getElementById(config.ids.baseUnitsId)
       .addEventListener("change", function(event) {
@@ -124,6 +141,10 @@ export class Screen {
       });
   }
 
+  /**
+   * Updates current view based on weather data.
+   * @param {Weather} weather - current Weather object
+   */
   update(weather) {
     // update reference to current Weather object
     this._weather = weather;

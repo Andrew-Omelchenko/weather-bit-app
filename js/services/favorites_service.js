@@ -1,11 +1,23 @@
 import * as config from "../config.js";
 import { ListService } from "./../services/list_service.js";
 
+/** Class representing a favorites service. */
 export class FavoritesService extends ListService {
+  /**
+   * Creates favorites service.
+   * @constructor
+   * @param {StorageService} storageSvc - StorageService object
+   * @param {string} name - name of the key in the local storage
+   */
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
 
+  /**
+   * Adds item to the favorites list
+   * @param {string} item - item to add to the list
+   * @returns {boolean} true, if item was added, false - otherwise
+   */
   add(item) {
     // is there the same element?
     for (let elem of this._data) {

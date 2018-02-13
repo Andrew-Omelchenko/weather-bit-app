@@ -1,8 +1,19 @@
 import * as config from "../config.js";
 
+/** Class representing a weather service. */
 export class WeatherService {
+  /**
+   * Creates weather service.
+   * @constructor
+   */
   constructor() {}
 
+  /**
+   * Get weather data for specified location
+   * @param {string} city - specified location
+   * @param {string} unitsCode - string code, representing system of measurement units
+   * @returns {Promise|null} - weather data or null in case of error
+   */
   getWeather(city, unitsCode) {
     let url = `${config.apiLink}${config.keyMod}${config.key}${config.daysMod}${config.numOfDays}${config.unitsMod}${unitsCode}${config.locMod}${city}`;
     let init = {

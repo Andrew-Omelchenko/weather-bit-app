@@ -1,3 +1,4 @@
+// Constants, related to the weather data provider
 export const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
 export const keyMod = "?key=";
 export const key = "91e53c3974b54ac9871fe08adfd31dd9";
@@ -6,6 +7,7 @@ export const locMod = "&city=";
 export const unitsMod = "&units=";
 export const iconLink = "https://www.weatherbit.io/static/img/icons/";
 
+// Weekday names array
 export const dayOfWeek = [
   "Sunday",
   "Monday",
@@ -16,8 +18,11 @@ export const dayOfWeek = [
   "Saturday"
 ];
 
-export const limit = 30;
+// number of days to forecast
 export const numOfDays = 7;
+
+// Value, that limits number of entries in history or favorites lists
+export const limit = 30;
 
 // Unit systems
 export const unitSystems = {

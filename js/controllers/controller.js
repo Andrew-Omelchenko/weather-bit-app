@@ -7,7 +7,12 @@ import { WeatherService } from "./../services/weather_service.js";
 import { Weather } from "./../models/model.js";
 import { Screen } from "./../views/view.js";
 
+/** Class representing a weather controller. */
 export class WeatherController {
+  /**
+   * Creates weather controller.
+   * @constructor
+   */
   constructor(doc, wnd) {
     this._doc = doc;
     this._wnd = wnd;
