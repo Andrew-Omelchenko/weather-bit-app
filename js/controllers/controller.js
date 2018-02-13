@@ -26,7 +26,6 @@ export class WeatherController {
     this._weatherService = new WeatherService();
     this._weather = new Weather(config.mockData, "metric");
     this._screen = new Screen(doc, this._weather, this);
-    // this._screen.update(this._weather);
   }
 
   switchUnits(units) {

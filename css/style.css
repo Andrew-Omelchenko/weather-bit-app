@@ -29,8 +29,7 @@ body {
   background: skyblue;
   border-radius: 10px;
   border: 1px solid gray;
-  line-height: 1.5;
-  margin-bottom: 10px; }
+  line-height: 1.5; }
 
 .day-panel {
   width: 30%;
@@ -54,17 +53,17 @@ body {
 .favorites,
 .history {
   width: 100%;
-  text-align: center;
-  margin-bottom: 10px; }
+  text-align: center; }
   .favorites input[type="text"],
   .history input[type="text"] {
     width: 70%; }
 
 .favorites {
-  margin-top: 10px; }
+  margin-top: 10px;
+  margin-bottom: 3px; }
 
 .loc-field input[type="text"] {
-  width: 170px; }
+  width: 220px; }
 
 .base-units {
   min-width: 60px; }

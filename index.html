@@ -12,26 +12,17 @@
   </head>
   <body>
     <header class="header">
-      <div class="flex-container">
-          <span>
-            <button class="btn" id="add-favorite-btn" title="Adds city to favorites" aria-label="Add favorite location">
-              <i class="fa fa-star" aria-hidden="true"></i>
-            </button>
-          </span>
-          <span class="loc-field">
-            <input class="btn wide" id="loc-field" type="text" placeholder="Enter location..." title="Enter location here">
-          </span>
-          <span class="base-units">
-            <select class="btn" id="base-units" title="Selects metric or imperial units" aria-labelledby="base-units">
-              <option value="metric">&deg;C, m/s</option>
-              <option value="imperial">&deg;F, mph</option>
-            </select>
-          </span>
-      </div>
-    </header>
-    <main>
-      <section class="flex-container current-day" id="current-day"></section>
-      <section class="flex-container another-days" id="another-days"></section>
+      <section class="flex-container">
+        <span class="loc-field">
+          <input class="btn wide" id="loc-field" type="text" placeholder="Enter location..." title="Enter location here">
+        </span>
+        <span class="base-units">
+          <select class="btn" id="base-units" title="Selects metric or imperial units" aria-labelledby="base-units">
+            <option value="metric">&deg;C, m/s</option>
+            <option value="imperial">&deg;F, mph</option>
+          </select>
+        </span>
+      </section>
       <section class="flex-container">
         <div class="favorites">
           <i class="fa fa-star" aria-hidden="true"></i>
@@ -68,6 +59,10 @@
           </span>
         </div>
       </section>
+    </header>
+    <main>
+      <section class="flex-container current-day" id="current-day"></section>
+      <section class="flex-container another-days" id="another-days"></section>
     </main>
     <script src="dist/bundle.js" type="module"></script>
   </body>

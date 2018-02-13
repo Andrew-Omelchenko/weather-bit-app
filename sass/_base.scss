@@ -15,7 +15,6 @@ $border-color: gray;
     border-radius: 10px;
     border: 1px solid $border-color;
     line-height: 1.5;
-    margin-bottom: 10px;
   }
 
   .day-panel {
@@ -44,7 +43,6 @@ $border-color: gray;
   .history {
     width: 100%;
     text-align: center;
-    margin-bottom: 10px;
 
     input[type="text"] {
       width: 70%;
@@ -53,12 +51,13 @@ $border-color: gray;
 
   .favorites {
     margin-top: 10px;
+    margin-bottom: 3px;
   }
 
   .loc-field {
 
     input[type="text"] {
-      width: 170px;
+      width: 220px;
     }
   }
 

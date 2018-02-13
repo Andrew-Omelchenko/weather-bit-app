@@ -68,6 +68,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+// Constants, related to the weather data provider
 const apiLink = "https://api.weatherbit.io/v2.0/forecast/daily";
 /* harmony export (immutable) */ __webpack_exports__["a"] = apiLink;
 
@@ -90,6 +91,7 @@ const iconLink = "https://www.weatherbit.io/static/img/icons/";
 /* harmony export (immutable) */ __webpack_exports__["d"] = iconLink;
 
 
+// Weekday names array
 const dayOfWeek = [
   "Sunday",
   "Monday",
@@ -102,11 +104,14 @@ const dayOfWeek = [
 /* harmony export (immutable) */ __webpack_exports__["b"] = dayOfWeek;
 
 
-const limit = 30;
-/* harmony export (immutable) */ __webpack_exports__["h"] = limit;
-
+// number of days to forecast
 const numOfDays = 7;
 /* harmony export (immutable) */ __webpack_exports__["k"] = numOfDays;
+
+
+// Value, that limits number of entries in history or favorites lists
+const limit = 30;
+/* harmony export (immutable) */ __webpack_exports__["h"] = limit;
 
 
 // Unit systems
@@ -362,45 +367,87 @@ const mockData = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (immutable) */ __webpack_exports__["b"] = extractBase;
-/* harmony export (immutable) */ __webpack_exports__["c"] = parseLocation;
-/* harmony export (immutable) */ __webpack_exports__["f"] = toFahrenheit;
-/* harmony export (immutable) */ __webpack_exports__["e"] = toCelsius;
-/* harmony export (immutable) */ __webpack_exports__["g"] = toMph;
-/* harmony export (immutable) */ __webpack_exports__["h"] = toMs;
-/* harmony export (immutable) */ __webpack_exports__["a"] = clearSelect;
-/* harmony export (immutable) */ __webpack_exports__["d"] = populateSelect;
+/* harmony export (immutable) */ __webpack_exports__["c"] = extractBase;
+/* harmony export (immutable) */ __webpack_exports__["d"] = parseLocation;
+/* harmony export (immutable) */ __webpack_exports__["g"] = toFahrenheit;
+/* harmony export (immutable) */ __webpack_exports__["f"] = toCelsius;
+/* harmony export (immutable) */ __webpack_exports__["h"] = toMph;
+/* harmony export (immutable) */ __webpack_exports__["i"] = toMs;
+/* harmony export (immutable) */ __webpack_exports__["b"] = clearSelect;
+/* harmony export (immutable) */ __webpack_exports__["e"] = populateSelect;
+/* harmony export (immutable) */ __webpack_exports__["a"] = addFavoriteLocation;
+/**
+ * Extracts base url from full url string
+ * @param {string} urlString - current full url string
+ * @returns {string} base url
+ */
 function extractBase(urlString) {
   return urlString.split("?").slice(0, -1);
 }
 
+/**
+ * Extracts location from full url string
+ * @param {string} urlString - current full url string
+ * @returns {string} location
+ */
 function parseLocation(urlString) {
   let parsed = new URL(urlString);
   return parsed.searchParams.get("city");
 }
 
+/**
+ * Converts temperature value from degrees Celsius to degrees Fahrenheit
+ * @param {number} value - current value in degrees Celsius
+ * @returns {number} value in degrees Fahrenheit
+ */
 function toFahrenheit(value) {
   return Math.round(value * 1.8 + 32);
 }
 
+/**
+ * Converts temperature value from degrees Fahrenheit to degrees Celsius
+ * @param {number} value - current value in degrees Fahrenheit
+ * @returns {number} value in degrees Celsius
+ */
 function toCelsius(value) {
   return Math.round((value - 32) / 1.8);
 }
 
+/**
+ * Converts velocity value from meters per second to miles per hour
+ * @param {number} value - current value in m/s
+ * @returns {number} value in mph
+ */
 function toMph(value) {
   return Math.round(value * 2.25);
 }
 
+/**
+ * Converts velocity value from miles per hour to meters per second
+ * @param {number} value - current value in mph
+ * @returns {number} value in m/s
+ */
 function toMs(value) {
   return Math.round(value / 2.25);
 }
 
+/**
+ * Clears content of the specified html element
+ * @param {HTMLElementObject} selectId - html element
+ */
 function clearSelect(selectId) {
   while (selectId.firstChild) {
     selectId.removeChild(selectId.firstChild);
   }
 }
 
+/**
+ * Populates <select> html element with child elements
+ * @param {Document} doc - current Document object
+ * @param {HTMLElementObject} selectId - html element
+ * @param {[]]} data - data to insert
+ * @param {string} direction - in "normal" or "reverse" direction
+ */
 function populateSelect(doc, selectId, data, direction) {
   let opt = null;
   if (direction == "normal") {
@@ -419,12 +466,40 @@ function populateSelect(doc, selectId, data, direction) {
 }
 
 
+/**
+ * Helper function for 'add favorite' button listener
+ * @param {Document} doc - current Document object
+ * @param {WeatherController} controller - current WeatherController object
+ * @param {HTMLElementObject} favListId - html element
+ */
+function addFavoriteLocation(doc, controller, favListId) {
+  console.log("Inside add favorite listener");
+  let result = controller.addFavorite();
+  if (result) {
+    clearSelect(favListId);
+    populateSelect(
+      doc,
+      favListId,
+      controller.getFavorites(),
+      "normal"
+    );
+  }
+};
+
+
 /***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/** Class representing a list service. */
 class ListService {
+  /**
+   * Creates list service.
+   * @constructor
+   * @param {StorageService} storageSvc - StorageService object
+   * @param {string} name - name of the key in the local storage
+   */
   constructor(storageSvc, name) {
     this._storageService = storageSvc;
     this._name = name;
@@ -434,12 +509,19 @@ class ListService {
     }
   }
 
+  /**
+   * Getter function for reading current data from the list
+   * @returns {[]} - current data
+   */
   get data() {
     console.log(`ListService. Getting ${this._name} data.`);
     console.log(this._data);
     return this._data;
   }
 
+  /**
+   * Clears data in the list
+   */
   clear() {
     this._storageService.remove(this._name);
     this._data = [];
@@ -488,11 +570,16 @@ window.onload = function() {
 
 
 
+/** Class representing a weather controller. */
 class WeatherController {
+  /**
+   * Creates weather controller.
+   * @constructor
+   */
   constructor(doc, wnd) {
     this._doc = doc;
     this._wnd = wnd;
-    this._base = __WEBPACK_IMPORTED_MODULE_1__helper_js__["b" /* extractBase */](this._wnd.location.href);
+    this._base = __WEBPACK_IMPORTED_MODULE_1__helper_js__["c" /* extractBase */](this._wnd.location.href);
     this._storageService = new __WEBPACK_IMPORTED_MODULE_2__services_storage_service_js__["a" /* StorageService */](this._wnd);
     this._favoritesService = new __WEBPACK_IMPORTED_MODULE_3__services_favorites_service_js__["a" /* FavoritesService */](
       this._storageService,
@@ -502,7 +589,6 @@ class WeatherController {
     this._weatherService = new __WEBPACK_IMPORTED_MODULE_5__services_weather_service_js__["a" /* WeatherService */]();
     this._weather = new __WEBPACK_IMPORTED_MODULE_6__models_model_js__["a" /* Weather */](__WEBPACK_IMPORTED_MODULE_0__config_js__["j" /* mockData */], "metric");
     this._screen = new __WEBPACK_IMPORTED_MODULE_7__views_view_js__["a" /* Screen */](doc, this._weather, this);
-    // this._screen.update(this._weather);
   }
 
   switchUnits(units) {
@@ -533,14 +619,14 @@ class WeatherController {
         );
         if (result) {
           let listId = this._doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyListId);
-          __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](listId);
-          __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](this._doc, listId, this.getHistory(), "reverse");
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["b" /* clearSelect */](listId);
+          __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* populateSelect */](this._doc, listId, this.getHistory(), "reverse");
         }
       });
   }
 
   start(startUrl) {
-    let loc = __WEBPACK_IMPORTED_MODULE_1__helper_js__["c" /* parseLocation */](startUrl);
+    let loc = __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* parseLocation */](startUrl);
     if (!loc) {
       loc = "Kyiv,UA";
     }
@@ -582,24 +668,46 @@ class WeatherController {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/** Class representing a storage service. */
 class StorageService {
+  /**
+   * Creates storage service.
+   * @constructor
+   * @param {Window} wnd - current Window object
+   */
   constructor(wnd) {
     this._wnd = wnd;
   }
 
+  /**
+   * Writes object to the local storage
+   * @param {Object} obj - object to add
+   * @param {string} name - name of the key
+   */
   write(obj, name) {
     let serialized = JSON.stringify(obj);
     this._wnd.localStorage.setItem(name, serialized);
   }
 
+  /**
+   * Reads object from the local storage
+   * @param {string} name - name of the key
+   */
   read(name) {
     return JSON.parse(this._wnd.localStorage.getItem(name));
   }
 
+  /**
+   * Removes object from the local storage
+   * @param {string} name - name of the key
+   */
   remove(name) {
     this._wnd.localStorage.removeItem(name);
   }
 
+  /**
+   * Clears local storage
+   */
   clear() {
     this._wnd.localStorage.clear();
   }
@@ -618,11 +726,23 @@ class StorageService {
 
 
 
+/** Class representing a favorites service. */
 class FavoritesService extends __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__["a" /* ListService */] {
+  /**
+   * Creates favorites service.
+   * @constructor
+   * @param {StorageService} storageSvc - StorageService object
+   * @param {string} name - name of the key in the local storage
+   */
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
 
+  /**
+   * Adds item to the favorites list
+   * @param {string} item - item to add to the list
+   * @returns {boolean} true, if item was added, false - otherwise
+   */
   add(item) {
     // is there the same element?
     for (let elem of this._data) {
@@ -658,11 +778,23 @@ class FavoritesService extends __WEBPACK_IMPORTED_MODULE_1__services_list_servic
 
 
 
+/** Class representing a history service. */
 class HistoryService extends __WEBPACK_IMPORTED_MODULE_1__services_list_service_js__["a" /* ListService */] {
+  /**
+   * Creates history service.
+   * @constructor
+   * @param {StorageService} storageSvc - StorageService object
+   * @param {string} name - name of the key in the local storage
+   */
   constructor(storageSvc, name) {
     super(storageSvc, name);
   }
 
+  /**
+   * Adds item to the history list
+   * @param {string} item - item to add to the list
+   * @returns {boolean} true, if item was added, false - otherwise
+   */
   add(item) {
     // check last
     if (item == this._data[this._data.length - 1]) {
@@ -703,9 +835,20 @@ class HistoryService extends __WEBPACK_IMPORTED_MODULE_1__services_list_service_
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__config_js__ = __webpack_require__(0);
 
 
+/** Class representing a weather service. */
 class WeatherService {
+  /**
+   * Creates weather service.
+   * @constructor
+   */
   constructor() {}
 
+  /**
+   * Get weather data for specified location
+   * @param {string} city - specified location
+   * @param {string} unitsCode - string code, representing system of measurement units
+   * @returns {Promise|null} - weather data or null in case of error
+   */
   getWeather(city, unitsCode) {
     let url = `${__WEBPACK_IMPORTED_MODULE_0__config_js__["a" /* apiLink */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["g" /* keyMod */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["f" /* key */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["c" /* daysMod */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]}${__WEBPACK_IMPORTED_MODULE_0__config_js__["m" /* unitsMod */]}${unitsCode}${__WEBPACK_IMPORTED_MODULE_0__config_js__["i" /* locMod */]}${city}`;
     let init = {
@@ -749,7 +892,14 @@ class WeatherService {
 
 
 
+/** Class representing a model. */
 class Weather {
+  /**
+   * Creates model.
+   * @constructor
+   * @param {Object} data - weather data
+   * @param {string} units - name of the system of measurement units
+   */
   constructor(data, units) {
     this._data = data;
     this._currentUnits = units;
@@ -763,6 +913,8 @@ class Weather {
       this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.velocityUnit;
     }
   }
+
+  /** Getters section. */
 
   get data() {
     return this._data;
@@ -784,6 +936,12 @@ class Weather {
     return this._currentVelocityUnits;
   }
 
+  /** Methods section. */
+
+  /**
+   * Switches current system of measurement units.
+   * @param {string} units - name of the system of measurement units
+   */
   switchUnits(units) {
     if (this._currentUnits == units) return;
     if (units == "metric") {
@@ -792,10 +950,10 @@ class Weather {
       this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.temperatureUnit;
       this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].metric.velocityUnit;
       for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {
-        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].temp);
-        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].min_temp);
-        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* toCelsius */](this._data.data[i].max_temp);
-        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["h" /* toMs */](this._data.data[i].wind_spd);
+        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toCelsius */](this._data.data[i].temp);
+        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toCelsius */](this._data.data[i].min_temp);
+        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toCelsius */](this._data.data[i].max_temp);
+        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["i" /* toMs */](this._data.data[i].wind_spd);
       }
     } else if (units == "imperial") {
       this._currentUnits = "imperial";
@@ -803,10 +961,10 @@ class Weather {
       this._currentTemperatureUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.temperatureUnit;
       this._currentVelocityUnits = __WEBPACK_IMPORTED_MODULE_0__config_js__["l" /* unitSystems */].imperial.velocityUnit;
       for (let i = 0; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {
-        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].temp);
-        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].min_temp);
-        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["f" /* toFahrenheit */](this._data.data[i].max_temp);
-        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["g" /* toMph */](this._data.data[i].wind_spd);
+        this._data.data[i].temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["g" /* toFahrenheit */](this._data.data[i].temp);
+        this._data.data[i].min_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["g" /* toFahrenheit */](this._data.data[i].min_temp);
+        this._data.data[i].max_temp = __WEBPACK_IMPORTED_MODULE_1__helper_js__["g" /* toFahrenheit */](this._data.data[i].max_temp);
+        this._data.data[i].wind_spd = __WEBPACK_IMPORTED_MODULE_1__helper_js__["h" /* toMph */](this._data.data[i].wind_spd);
       }
     }
   }
@@ -825,7 +983,15 @@ class Weather {
 
 
 
+/** Class representing a view. */
 class Screen {
+  /**
+   * Creates view.
+   * @constructor
+   * @param {Document} doc - current Document object
+   * @param {Weather} weather - current Weather object
+   * @param {WeatherController} controller - current WeatherController object
+   */
   constructor(doc, weather, controller) {
     this._doc = doc;
     this._controller = controller;
@@ -840,15 +1006,18 @@ class Screen {
     this._init();
   }
 
+  /**
+   * Initializes current view elements.
+   */
   _init() {
     console.log("Screen. Getting favorites");
-    __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
+    __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* populateSelect */](
       this._doc,
       this._favoritesListId,
       this._controller.getFavorites(),
       "normal"
     );
-    __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
+    __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* populateSelect */](
       this._doc,
       this._historyListId,
       this._controller.getHistory(),
@@ -858,8 +1027,14 @@ class Screen {
     this._addListeners(this, this._doc, this._controller);
   }
 
+  /**
+   * Adds listeners to the current view elements.
+   * @param {Screen} view - current Screen object
+   * @param {Document} doc - current Document object
+   * @param {WeatherController} controller - current WeatherController object
+   */
   _addListeners(view, doc, controller) {
-    // add event listener to Clear button
+    // adds event listener to Clear button
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].locFieldId)
       .addEventListener("change", function(event) {
@@ -870,30 +1045,14 @@ class Screen {
         fld.value = "";
       });
 
-    // add event listener to select element
+    // adds event listener to select units element
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].baseUnitsId)
       .addEventListener("change", function(event) {
         controller.switchUnits(event.target.value);
       });
 
-    // add event listener to add favorite button
-    doc
-      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].addFavoriteBtnId)
-      .addEventListener("click", function(event) {
-        let result = controller.addFavorite();
-        if (result) {
-          __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._favoritesListId);
-          __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
-            view._doc,
-            view._favoritesListId,
-            controller.getFavorites(),
-            "normal"
-          );
-        }
-      });
-
-    // add event listener to go to favorite button
+    // adds event listener to go to favorite button
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].favoritesGoBtnId)
       .addEventListener("click", function(event) {
@@ -904,13 +1063,13 @@ class Screen {
         fld.value = "";
       });
 
-    // add event listener to clear favorites button
+    // adds event listener to clear favorites button
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].clearFavoritesBtnId)
       .addEventListener("click", function(event) {
         controller.clearFavorites();
-        __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._favoritesListId);
-        __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["b" /* clearSelect */](view._favoritesListId);
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* populateSelect */](
           view._doc,
           view._favoritesListId,
           controller.getFavorites(),
@@ -920,7 +1079,7 @@ class Screen {
         fld.value = "";
       });
 
-    // add event listener to go to history item button
+    // adds event listener to go to history item button
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].historyGoBtnId)
       .addEventListener("click", function(event) {
@@ -931,13 +1090,13 @@ class Screen {
         fld.value = "";
       });
 
-    // add event listener to clear history button
+    // adds event listener to clear history button
     doc
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].clearHistoryBtnId)
       .addEventListener("click", function(event) {
         controller.clearHistory();
-        __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* clearSelect */](view._historyListId);
-        __WEBPACK_IMPORTED_MODULE_1__helper_js__["d" /* populateSelect */](
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["b" /* clearSelect */](view._historyListId);
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["e" /* populateSelect */](
           view._doc,
           view._historyListId,
           controller.getHistory(),
@@ -948,18 +1107,29 @@ class Screen {
       });
   }
 
+  /**
+   * Updates current view based on weather data.
+   * @param {Weather} weather - current Weather object
+   */
   update(weather) {
+    console.log("Inside update");
     // update reference to current Weather object
     this._weather = weather;
 
     this._currentDayId.innerHTML = "";
     let currentDayString = `<section class="flex-container main-panel">
       <div class="flex-container top-panel">
-        <span class="location">
-          <div id="location">${weather.data.city_name},${
-      weather.data.country_code
-    }</div>
+        <span>
+          <button class="btn" 
+            id="add-favorite-btn" 
+            title="Adds city to favorites" 
+            aria-label="Add favorite location">
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </button>
         </span>
+        <span class="location" id="location">${weather.data.city_name},${
+          weather.data.country_code
+        }</span>
       </div>
       <div class="flex-container left-panel">
         <div class="left-top">
@@ -1026,6 +1196,16 @@ class Screen {
       </div>
     </section>`;
     this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
+
+    // dynamically add event listener
+    let doc = this._doc;
+    let controller = this._controller;
+    let favListId = this._favoritesListId;
+    this._doc
+      .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].addFavoriteBtnId)
+      .addEventListener("click", function() {
+        __WEBPACK_IMPORTED_MODULE_1__helper_js__["a" /* addFavoriteLocation */](doc, controller, favListId);
+      });
 
     this._anotherDaysId.innerHTML = "";
     for (let i = 1; i < __WEBPACK_IMPORTED_MODULE_0__config_js__["k" /* numOfDays */]; i++) {

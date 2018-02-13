@@ -86,3 +86,24 @@ export function populateSelect(doc, selectId, data, direction) {
     }
   }
 }
+
+
+/**
+ * Helper function for 'add favorite' button listener
+ * @param {Document} doc - current Document object
+ * @param {WeatherController} controller - current WeatherController object
+ * @param {HTMLElementObject} favListId - html element
+ */
+export function addFavoriteLocation(doc, controller, favListId) {
+  console.log("Inside add favorite listener");
+  let result = controller.addFavorite();
+  if (result) {
+    clearSelect(favListId);
+    populateSelect(
+      doc,
+      favListId,
+      controller.getFavorites(),
+      "normal"
+    );
+  }
+};

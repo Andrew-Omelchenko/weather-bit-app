@@ -52,7 +52,7 @@ export class Screen {
    * @param {WeatherController} controller - current WeatherController object
    */
   _addListeners(view, doc, controller) {
-    // add event listener to Clear button
+    // adds event listener to Clear button
     doc
       .getElementById(config.ids.locFieldId)
       .addEventListener("change", function(event) {
@@ -63,30 +63,14 @@ export class Screen {
         fld.value = "";
       });
 
-    // add event listener to select units element
+    // adds event listener to select units element
     doc
       .getElementById(config.ids.baseUnitsId)
       .addEventListener("change", function(event) {
         controller.switchUnits(event.target.value);
       });
 
-    // add event listener to add favorite button
-    doc
-      .getElementById(config.ids.addFavoriteBtnId)
-      .addEventListener("click", function(event) {
-        let result = controller.addFavorite();
-        if (result) {
-          helper.clearSelect(view._favoritesListId);
-          helper.populateSelect(
-            view._doc,
-            view._favoritesListId,
-            controller.getFavorites(),
-            "normal"
-          );
-        }
-      });
-
-    // add event listener to go to favorite button
+    // adds event listener to go to favorite button
     doc
       .getElementById(config.ids.favoritesGoBtnId)
       .addEventListener("click", function(event) {
@@ -97,7 +81,7 @@ export class Screen {
         fld.value = "";
       });
 
-    // add event listener to clear favorites button
+    // adds event listener to clear favorites button
     doc
       .getElementById(config.ids.clearFavoritesBtnId)
       .addEventListener("click", function(event) {
@@ -113,7 +97,7 @@ export class Screen {
         fld.value = "";
       });
 
-    // add event listener to go to history item button
+    // adds event listener to go to history item button
     doc
       .getElementById(config.ids.historyGoBtnId)
       .addEventListener("click", function(event) {
@@ -124,7 +108,7 @@ export class Screen {
         fld.value = "";
       });
 
-    // add event listener to clear history button
+    // adds event listener to clear history button
     doc
       .getElementById(config.ids.clearHistoryBtnId)
       .addEventListener("click", function(event) {
@@ -146,17 +130,24 @@ export class Screen {
    * @param {Weather} weather - current Weather object
    */
   update(weather) {
+    console.log("Inside update");
     // update reference to current Weather object
     this._weather = weather;
 
     this._currentDayId.innerHTML = "";
     let currentDayString = `<section class="flex-container main-panel">
       <div class="flex-container top-panel">
-        <span class="location">
-          <div id="location">${weather.data.city_name},${
-      weather.data.country_code
-    }</div>
+        <span>
+          <button class="btn" 
+            id="add-favorite-btn" 
+            title="Adds city to favorites" 
+            aria-label="Add favorite location">
+            <i class="fa fa-star" aria-hidden="true"></i>
+          </button>
         </span>
+        <span class="location" id="location">${weather.data.city_name},${
+          weather.data.country_code
+        }</span>
       </div>
       <div class="flex-container left-panel">
         <div class="left-top">
@@ -223,6 +214,16 @@ export class Screen {
       </div>
     </section>`;
     this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
+
+    // dynamically add event listener
+    let doc = this._doc;
+    let controller = this._controller;
+    let favListId = this._favoritesListId;
+    this._doc
+      .getElementById(config.ids.addFavoriteBtnId)
+      .addEventListener("click", function() {
+        helper.addFavoriteLocation(doc, controller, favListId);
+      });
 
     this._anotherDaysId.innerHTML = "";
     for (let i = 1; i < config.numOfDays; i++) {
