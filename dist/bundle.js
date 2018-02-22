@@ -1116,86 +1116,85 @@ class Screen {
     // update reference to current Weather object
     this._weather = weather;
 
-    this._currentDayId.innerHTML = "";
-    let currentDayString = `<section class="flex-container main-panel">
-      <div class="flex-container top-panel">
-        <span>
-          <button class="btn" 
-            id="add-favorite-btn" 
-            title="Adds city to favorites" 
-            aria-label="Add favorite location">
-            <i class="fa fa-star" aria-hidden="true"></i>
-          </button>
-        </span>
-        <span class="location" id="location">${weather.data.city_name},${
-          weather.data.country_code
-        }</span>
-      </div>
-      <div class="flex-container left-panel">
-        <div class="left-top">
-          <div class="day" id="day">
-            ${__WEBPACK_IMPORTED_MODULE_0__config_js__["b" /* dayOfWeek */][new Date(weather.data.data[0].datetime).getDay()]}
+    this._currentDayId.innerHTML = `
+      <section class="flex-container main-panel">
+        <div class="flex-container top-panel">
+          <span>
+            <button class="btn" 
+              id="add-favorite-btn" 
+              title="Adds city to favorites" 
+              aria-label="Add favorite location">
+              <i class="fa fa-star" aria-hidden="true"></i>
+            </button>
+          </span>
+          <span class="location" id="location">${weather.data.city_name},${
+            weather.data.country_code
+          }</span>
+        </div>
+        <div class="flex-container left-panel">
+          <div class="left-top">
+            <div class="day" id="day">
+              ${__WEBPACK_IMPORTED_MODULE_0__config_js__["b" /* dayOfWeek */][new Date(weather.data.data[0].datetime).getDay()]}
+            </div>
+            <time class="date" datetime="${weather.data.data[0].datetime}">
+              ${weather.data.data[0].datetime}
+            </time>
+            <div class="add-temp temp-max">
+              max: <span id="temp-max">
+                ${Math.round(weather.data.data[0].max_temp)}
+              </span>&deg;
+              <span id="temp-max-units">
+                ${weather.currentTemperatureUnits}
+              </span>
+            </div>
+            <div class="add-temp temp-min">
+              min: <span id="temp-min">
+                ${Math.round(weather.data.data[0].min_temp)}
+              </span>&deg;
+              <span id="temp-min-units">
+                ${weather.currentTemperatureUnits}
+              </span>
+            </div>
           </div>
-          <time class="date" datetime="${weather.data.data[0].datetime}">
-            ${weather.data.data[0].datetime}
-          </time>
-          <div class="add-temp temp-max">
-            max: <span id="temp-max">
-              ${Math.round(weather.data.data[0].max_temp)}
-            </span>&deg;
-            <span id="temp-max-units">
-              ${weather.currentTemperatureUnits}
-            </span>
-          </div>
-          <div class="add-temp temp-min">
-            min: <span id="temp-min">
-              ${Math.round(weather.data.data[0].min_temp)}
-            </span>&deg;
-            <span id="temp-min-units">
-              ${weather.currentTemperatureUnits}
-            </span>
+          <div class="left-bottom">
+            <div class="temperature">
+              <span id="temperature">${Math.round(
+                weather.data.data[0].temp
+              )}</span>&deg;<span id="temperature-units">${
+              weather.currentTemperatureUnits
+            }</span>
+            </div>
           </div>
         </div>
-        <div class="left-bottom">
-          <div class="temperature">
-            <span id="temperature">${Math.round(
-              weather.data.data[0].temp
-            )}</span>&deg;<span id="temperature-units">${
-      weather.currentTemperatureUnits
-    }</span>
+        <div class="flex-container right-panel">
+          <div class="right-top">
+            <img class="icon" id="icon" 
+              src="${__WEBPACK_IMPORTED_MODULE_0__config_js__["d" /* iconLink */]}${weather.data.data[0].weather.icon}.png" 
+              alt="weather-state">
+          </div>
+          <div class="right-bottom">
+            <div id="description">
+              ${weather.data.data[0].weather.description}
+            </div>
+            <div class="humidity">
+              <img class="humidity-icon" src="img/humidity.png" alt="humidity: ">
+              <span id="humidity">
+                ${weather.data.data[0].rh}
+              </span>%
+            </div>
+            <div class="wind">
+              <span id="velocity">
+                ${weather.data.data[0].wind_spd}
+              </span><span id="velocity-units">
+                ${weather.currentVelocityUnits}
+              </span>
+              <span id="direction">
+                ${weather.data.data[0].wind_cdir}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="flex-container right-panel">
-        <div class="right-top">
-          <img class="icon" id="icon" 
-            src="${__WEBPACK_IMPORTED_MODULE_0__config_js__["d" /* iconLink */]}${weather.data.data[0].weather.icon}.png" 
-            alt="weather-state">
-        </div>
-        <div class="right-bottom">
-          <div id="description">
-            ${weather.data.data[0].weather.description}
-          </div>
-          <div class="humidity">
-            <img class="humidity-icon" src="img/humidity.png" alt="humidity: ">
-            <span id="humidity">
-              ${weather.data.data[0].rh}
-            </span>%
-          </div>
-          <div class="wind">
-            <span id="velocity">
-              ${weather.data.data[0].wind_spd}
-            </span><span id="velocity-units">
-              ${weather.currentVelocityUnits}
-            </span>
-            <span id="direction">
-              ${weather.data.data[0].wind_cdir}
-            </span>
-          </div>
-        </div>
-      </div>
-    </section>`;
-    this._currentDayId.insertAdjacentHTML("beforeend", currentDayString);
+      </section>`;
 
     // dynamically add event listener
     let doc = this._doc;
