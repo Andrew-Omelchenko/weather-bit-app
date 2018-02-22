@@ -57,7 +57,7 @@ export class Screen {
       .getElementById(config.ids.locFieldId)
       .addEventListener("change", function(event) {
         let fld = doc.getElementById(config.ids.locFieldId);
-        let loc = fld.value;
+        let loc = fld.value.trim();
         if (loc == "") return;
         controller.changeLocation(loc);
         fld.value = "";

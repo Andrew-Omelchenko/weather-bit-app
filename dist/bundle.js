@@ -1039,7 +1039,7 @@ class Screen {
       .getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].locFieldId)
       .addEventListener("change", function(event) {
         let fld = doc.getElementById(__WEBPACK_IMPORTED_MODULE_0__config_js__["e" /* ids */].locFieldId);
-        let loc = fld.value;
+        let loc = fld.value.trim();
         if (loc == "") return;
         controller.changeLocation(loc);
         fld.value = "";
