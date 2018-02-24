@@ -108,24 +108,6 @@ $border-color: gray;
   }
 }
 
-@keyframes showingUp {
-  0% {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  80% {
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(0px);
-  }
-}
-
-.showing-up {
-  animation: showingUp 1.5s ease-out;
-}
-
 @keyframes movingToRight {
   0% {
     opacity: 0;
@@ -160,4 +142,20 @@ $border-color: gray;
 
 .moving-to-left {
   animation: movingToLeft 1.5s ease-out;
+}
+
+@keyframes showingUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.showing-up {
+  animation: showingUp 1s ease-out 1.5s;
+  animation-fill-mode: backwards;
 }
