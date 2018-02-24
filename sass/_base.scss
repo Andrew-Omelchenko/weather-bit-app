@@ -9,21 +9,23 @@ $border-color: gray;
 
 @mixin flex-settings {
 
-  .main-panel {
-    padding: 20px;
+  .main-panel,
+  .day-panel {
     background: $bg-color-main-panel;
-    border-radius: 10px;
     border: 1px solid $border-color;
     line-height: 1.5;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .3);
+  }
+
+  .main-panel {
+    padding: 20px;  
+    border-radius: 10px;
   }
 
   .day-panel {
     width: 30%;
     padding: 5px;
-    background: $bg-color-main-panel;
     border-radius: 5px;
-    border: 1px solid $border-color;
-    line-height: 1.5;
     font-weight: bold;
     margin: 7px 0 7px 0;
   }

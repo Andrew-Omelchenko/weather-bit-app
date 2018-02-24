@@ -98,7 +98,8 @@ body {
 		opacity: 1;
 		transition: all .2s;
 	
-		&:hover {
+		&:hover,
+		&:focus {
 			transform: translate(-3px, -3px);
 			box-shadow: 4px 4px 10px rgba(0, 0, 0, .5);
 		}
