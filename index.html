@@ -12,7 +12,7 @@
   </head>
   <body>
     <header class="header">
-      <section class="flex-container">
+      <section class="flex-container moving-to-right">
         <span class="loc-field">
           <input class="btn wide" id="loc-field" type="text" placeholder="Enter location..." title="Enter location here">
         </span>
@@ -23,7 +23,7 @@
           </select>
         </span>
       </section>
-      <section class="flex-container">
+      <section class="flex-container moving-to-left">
         <div class="favorites">
           <i class="fa fa-star" aria-hidden="true"></i>
           <span>
@@ -31,12 +31,12 @@
             <datalist id="favorites-lst"></datalist>
           </span>
           <span>
-            <button class="btn" id="favorites-go-btn" title="Loads selected city data" aria-label="Search favorite location">
+            <button class="btn btn-active" id="favorites-go-btn" title="Loads selected city data" aria-label="Search favorite location">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </span>
           <span>
-            <button class="btn" id="clear-favorites-btn" title="Clears list of favorites" aria-label="Clear list of favorites">
+            <button class="btn btn-active" id="clear-favorites-btn" title="Clears list of favorites" aria-label="Clear list of favorites">
               <i class="fa fa-times-circle" aria-hidden="true"></i>
             </button>
           </span>
@@ -48,12 +48,12 @@
             <datalist id="history-lst"></datalist>
           </span>
           <span>
-            <button class="btn" id="history-go-btn" title="Loads selected city data" aria-label="Search history location">
+            <button class="btn btn-active" id="history-go-btn" title="Loads selected city data" aria-label="Search history location">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
           </span>
           <span>
-            <button class="btn" id="clear-history-btn" title="Clears history list" aria-label="Clear history list">
+            <button class="btn btn-active" id="clear-history-btn" title="Clears history list" aria-label="Clear history list">
               <i class="fa fa-times-circle" aria-hidden="true"></i>
             </button>
           </span>
@@ -61,8 +61,8 @@
       </section>
     </header>
     <main>
-      <section class="flex-container current-day" id="current-day"></section>
-      <section class="flex-container another-days" id="another-days"></section>
+      <section class="flex-container current-day showing-up" id="current-day"></section>
+      <section class="flex-container another-days showing-up" id="another-days"></section>
     </main>
     <script src="dist/bundle.js" type="module"></script>
   </body>

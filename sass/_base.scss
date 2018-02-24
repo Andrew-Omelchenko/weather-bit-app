@@ -105,3 +105,57 @@ $border-color: gray;
     text-align: center;
   }
 }
+
+@keyframes showingUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  80% {
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.showing-up {
+  animation: showingUp 1.5s ease-out;
+}
+
+@keyframes movingToRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.moving-to-right {
+  animation: movingToRight 1.5s ease-out;
+}
+
+@keyframes movingToLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  80% {
+    transform: translateX(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px);
+  }
+}
+
+.moving-to-left {
+  animation: movingToLeft 1.5s ease-out;
+}

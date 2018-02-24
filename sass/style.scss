@@ -91,6 +91,21 @@ body {
 	padding: 5px 8px 5px 8px;
 
 	&:hover {
-		opacity: 0.5;
+		opacity: 0.7;
+	}
+
+	&.btn-active {
+		opacity: 1;
+		transition: all .2s;
+	
+		&:hover {
+			transform: translate(-3px, -3px);
+			box-shadow: 4px 4px 10px rgba(0, 0, 0, .5);
+		}
+	
+		&:active {
+			transform: translate(-1px, -1px);
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, .5);
+		}
 	}
 }

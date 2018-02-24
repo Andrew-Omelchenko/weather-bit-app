@@ -138,7 +138,7 @@ export class Screen {
       <section class="flex-container main-panel">
         <div class="flex-container top-panel">
           <span>
-            <button class="btn" 
+            <button class="btn btn-active" 
               id="add-favorite-btn" 
               title="Adds city to favorites" 
               aria-label="Add favorite location">
